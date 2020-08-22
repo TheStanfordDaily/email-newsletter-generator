@@ -1,0 +1,43 @@
+<!-- Step 7: It all comes together... -->
+<!-- We've got all of the building blocks for creating the full "look" of our form now! -->
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="step7.css">
+  </head>
+
+  <body>
+    <h1 id="the_title">So you wanna set up a Stanford Daily email newsletter?</h1>
+    <!-- Step 7.1
+      In the previous step, you added more text areas into the div with id "featured_fields3"
+      Bring those changes into this file
+    -->
+    <div id="featured_fields3">
+      <span>Featured content headline</span>
+      <textarea></textarea>
+    </div>
+    <!-- Step 7.2
+      Our newsletter would be pretty empty if it just contained a single article. In reality, in
+      addition to a single featured content headline, we have 3 articles from each of the following categories: 
+      "News Article", "Ops Article", "Sports Article", "Arts & Life Article", "Grind Article", and "Satire Article".
+      Your job is to write the code for each of these items! Remember--copy & paste is your friend :)!
+
+      A note on CSS styling: you might notice that the current featured content headline div is given the
+      id "featured_fields3" and that corresponding styling in step7.css. As you might guess, this means
+      that we want you to also add "featured_fields2" and "featured_fields1" id selectors to the css file.
+      correspondingly, you'll want the first article's div in each group of 3 to have the id "featured_fields1",
+      the second article's div to have "featured_fields2", etc. You should also use CSS to make the color of 
+      each featured_fields type have a different color!
+    -->
+    <button onclick="alert('This is an Alert!')">Submit all changes</button>
+  </body>
+</html>
+
+<!-- Step 7.3
+  Congrats! At this point, you've finished the entire look of the UI!
+  Now, all we need to do is write the "logic" to take the user's inputs and 
+  create a preview of the newsletter from those inputs when the user clicks submit.
+  We'll be using Javascript for that!
+-->
