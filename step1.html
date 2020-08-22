@@ -1,16 +1,235 @@
+<!-- Step 1: Recap -->
+
+<!-- Step 1.0
+  We've provided below our own result of the previous week's exercises.
+  You should go through and replace all of our code with your own--it'll be good
+  review from last week, plus there can always be bugs in other peoples code! :)
+-->
+
 <!DOCTYPE html>
 
 <html>
   <head>
-    <link rel="stylesheet" href="step7.css">
+    <link rel="stylesheet" href="step1.css">
   </head>
 
   <body>
     <h1 id="the_title">So you wanna set up a Stanford Daily email newsletter?</h1>
+
     <div id="featured_fields3">
-      <span>Featured content headline</span>
-      <textarea></textarea>
+    <span>Featured content headline</span>
+    <textarea id="featured_content_headline_text"></textarea><br><br>
+    <span>Featured content author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="featured_content_byline_text"></textarea><br><br>
+    <span>Featured content link</span>
+    <textarea id="featured_content_links_text"></textarea><br><br>
+    <span>Featured content image link</span>
+    <textarea id="featured_content_image_text"></textarea><br><br>
+    <span>Featured content image alt text (should describe photo in case it cannot be seen)</span>
+    <textarea id="featured_content_image_alt_text"></textarea><br><br>
+    <span>Featured content excerpt</span>
+    <textarea id="featured_content_excerpt_text"></textarea>
     </div>
-    <button onclick="alert('This is an Alert!')">Submit all changes</button>
+    
+    <div id="featured_fields1">
+    <span>News article 1 headline</span>
+    <textarea id="news_article_1_headline_text"></textarea><br><br>
+    <span>News article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="news_article_1_byline_text"></textarea><br><br>
+    <span>News article 1 link</span>
+    <textarea id="news_article_1_links_text"></textarea><br><br>
+    <span>News article 1 excerpt</span>
+    <textarea id="news_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>News article 2 headline</span>
+    <textarea id="news_article_2_headline_text"></textarea><br><br>
+    <span>News article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="news_article_2_byline_text"></textarea><br><br>
+    <span>News article 2 link</span>
+    <textarea id="news_article_2_links_text"></textarea><br><br>
+    <span>News article 2 excerpt</span>
+    <textarea id="news_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>News article 3 headline</span>
+        <textarea id="news_article_3_headline_text"></textarea><br><br>
+        <span>News article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="news_article_3_byline_text"></textarea><br><br>
+        <span>News article 3 link</span>
+        <textarea id="news_article_3_links_text"></textarea><br><br>
+        <span>News article 3 excerpt</span>
+        <textarea id="news_article_3_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields1">
+    <span>Ops article 1 headline</span>
+    <textarea id="ops_article_1_headline_text"></textarea><br><br>
+    <span>Ops article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="ops_article_1_byline_text"></textarea><br><br>
+    <span>Ops article 1 link</span>
+    <textarea id="ops_article_1_links_text"></textarea><br><br>
+    <span>Ops article 1 excerpt</span>
+    <textarea id="ops_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>Ops article 2 headline</span>
+    <textarea id="ops_article_2_headline_text"></textarea><br><br>
+    <span>Ops article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="ops_article_2_byline_text"></textarea><br><br>
+    <span>Ops article 2 link</span>
+    <textarea id="ops_article_2_links_text"></textarea><br><br>
+    <span>Ops article 2 excerpt</span>
+    <textarea id="ops_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>Ops article 3 headline</span>
+        <textarea id="ops_article_3_headline_text"></textarea><br><br>
+        <span>Ops article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="ops_article_3_byline_text"></textarea><br><br>
+        <span>Ops article 3 link</span>
+        <textarea id="ops_article_3_links_text"></textarea><br><br>
+        <span>Ops article 3 excerpt</span>
+        <textarea id="ops_article_3_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields1">
+    <span>Sports article 1 headline</span>
+    <textarea id="sports_article_1_headline_text"></textarea><br><br>
+    <span>Sports article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="sports_article_1_byline_text"></textarea><br><br>
+    <span>Sports article 1 link</span>
+    <textarea id="sports_article_1_links_text"></textarea><br><br>
+    <span>Sports article 1 excerpt</span>
+    <textarea id="sports_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>Sports article 2 headline</span>
+    <textarea id="sports_article_2_headline_text"></textarea><br><br>
+    <span>Sports article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="sports_article_2_byline_text"></textarea><br><br>
+    <span>Sports article 2 link</span>
+    <textarea id="sports_article_2_links_text"></textarea><br><br>
+    <span>Sports article 2 excerpt</span>
+    <textarea id="sports_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>Sports article 3 headline</span>
+        <textarea id="sports_article_3_headline_text"></textarea><br><br>
+        <span>Sports article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="sports_article_3_byline_text"></textarea><br><br>
+        <span>Sports article 3 link</span>
+        <textarea id="sports_article_3_links_text"></textarea><br><br>
+        <span>Sports article 3 excerpt</span>
+        <textarea id="sports_article_3_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields1">
+    <span>Arts & Life article 1 headline</span>
+    <textarea id="arts-life_article_1_headline_text"></textarea><br><br>
+    <span>Arts & Life article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="arts-life_article_1_byline_text"></textarea><br><br>
+    <span>Arts & Life article 1 link</span>
+    <textarea id="arts-life_article_1_links_text"></textarea><br><br>
+    <span>Arts & Life article 1 excerpt</span>
+    <textarea id="arts-life_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>Arts & Life article 2 headline</span>
+    <textarea id="arts-life_article_2_headline_text"></textarea><br><br>
+    <span>Arts & Life article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="arts-life_article_2_byline_text"></textarea><br><br>
+    <span>Arts & Life article 2 link</span>
+    <textarea id="arts-life_article_2_links_text"></textarea><br><br>
+    <span>Arts & Life article 2 excerpt</span>
+    <textarea id="arts-life_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>Arts & Life article 3 headline</span>
+        <textarea id="arts-life_article_3_headline_text"></textarea><br><br>
+        <span>Arts & Life article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="arts-life_article_3_byline_text"></textarea><br><br>
+        <span>Arts & Life article 3 link</span>
+        <textarea id="arts-life_article_3_links_text"></textarea><br><br>
+        <span>Arts & Life article 3 excerpt</span>
+        <textarea id="arts-life_article_3_excerpt_text"></textarea>
+        </div>
+    
+    <div id="featured_fields1">
+    <span>Grind article 1 headline</span>
+    <textarea id="grind_article_1_headline_text"></textarea><br><br>
+    <span>Grind article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="grind_article_1_byline_text"></textarea><br><br>
+    <span>Grind article 1 link</span>
+    <textarea id="grind_article_1_links_text"></textarea><br><br>
+    <span>Grind article 1 excerpt</span>
+    <textarea id="grind_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>Grind article 2 headline</span>
+    <textarea id="grind_article_2_headline_text"></textarea><br><br>
+    <span>Grind article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="grind_article_2_byline_text"></textarea><br><br>
+    <span>Grind article 2 link</span>
+    <textarea id="grind_article_2_links_text"></textarea><br><br>
+    <span>Grind article 2 excerpt</span>
+    <textarea id="grind_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>Grind article 3 headline</span>
+        <textarea id="grind_article_3_headline_text"></textarea><br><br>
+        <span>Grind article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="grind_article_3_byline_text"></textarea><br><br>
+        <span>Grind article 3 link</span>
+        <textarea id="grind_article_3_links_text"></textarea><br><br>
+        <span>Grind article 3 excerpt</span>
+        <textarea id="grind_article_3_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields1">
+    <span>Satire article 1 headline</span>
+    <textarea id="satire_article_1_headline_text"></textarea><br><br>
+    <span>Satire article 1 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="satire_article_1_byline_text"></textarea><br><br>
+    <span>Satire article 1 link</span>
+    <textarea id="satire_article_1_links_text"></textarea><br><br>
+    <span>Satire article 1 excerpt</span>
+    <textarea id="satire_article_1_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields2">
+    <span>Satire article 2 headline</span>
+    <textarea id="satire_article_2_headline_text"></textarea><br><br>
+    <span>Satire article 2 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="satire_article_2_byline_text"></textarea><br><br>
+    <span>Satire article 2 link</span>
+    <textarea id="satire_article_2_links_text"></textarea><br><br>
+    <span>Satire article 2 excerpt</span>
+    <textarea id="satire_article_2_excerpt_text"></textarea>
+    </div>
+    
+    <div id="featured_fields3">
+        <span>Satire article 3 headline</span>
+        <textarea id="satire_article_3_headline_text"></textarea><br><br>
+        <span>Satire article 3 author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+        <textarea id="satire_article_3_byline_text"></textarea><br><br>
+        <span>Satire article 3 link</span>
+        <textarea id="satire_article_3_links_text"></textarea><br><br>
+        <span>Satire article 3 excerpt</span>
+        <textarea id="satire_article_3_excerpt_text"></textarea>
+        </div>
+    
+    <button onclick="set_featured_content()">Submit all changes</button>
+    <button onclick="get_email_body()">Get HTML for email (after clicking, scroll to very bottom of page, copy all text in box and paste into Mailchimp)</button>
   </body>
 </html>

@@ -215,9 +215,192 @@
     <textarea id="satire_article_3_excerpt_text"></textarea>
     </div>
 
-<button onclick="alert('unimplemented!')">Submit all changes</button>
-<button onclick="alert('unimplemented!')">Get HTML for email (after clicking, scroll to very bottom of page, copy all text in box and paste into Mailchimp)</button>
+<button onclick="set_featured_content()">Submit all changes</button>
+<button onclick="get_email_body()">Get HTML for email (after clicking, scroll to very bottom of page, copy all text in box and paste into Mailchimp)</button>
 <br><br>
+
+<script>
+function set_featured_content() {
+    document.getElementById("featured_content_headline_link").innerHTML = document.getElementById("featured_content_headline_text").value;
+    document.getElementById("featured_content_byline").innerHTML = "By " + document.getElementById("featured_content_byline_text").value + "&nbsp&nbsp●&nbsp";
+    document.getElementById("featured_content_image_link").href = document.getElementById("featured_content_links_text").value;
+    document.getElementById("featured_content_image").alt = document.getElementById("featured_content_image_alt_text").value;
+    document.getElementById("featured_content_headline_link").href = document.getElementById("featured_content_links_text").value;
+    document.getElementById("featured_content_read_more_link").href = document.getElementById("featured_content_links_text").value;
+    document.getElementById("featured_content_image").src = document.getElementById("featured_content_image_text").value;
+    document.getElementById("featured_content_excerpt").innerHTML = document.getElementById("featured_content_excerpt_text").value;
+
+    document.getElementById("news_article_1_headline_link").innerHTML = document.getElementById("news_article_1_headline_text").value;
+    document.getElementById("news_article_1_headline_link").href = document.getElementById("news_article_1_links_text").value;
+    document.getElementById("news_article_1_excerpt").innerHTML = document.getElementById("news_article_1_excerpt_text").value;
+    document.getElementById("news_article_1_byline_link").href = document.getElementById("news_article_1_links_text").value;
+    document.getElementById("news_article_1_byline").innerHTML = "By " + document.getElementById("news_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("news_article_2_headline_link").innerHTML = document.getElementById("news_article_2_headline_text").value;
+    document.getElementById("news_article_2_headline_link").href = document.getElementById("news_article_2_links_text").value;
+    document.getElementById("news_article_2_excerpt").innerHTML = document.getElementById("news_article_2_excerpt_text").value;
+    document.getElementById("news_article_2_byline_link").href = document.getElementById("news_article_2_links_text").value;
+    document.getElementById("news_article_2_byline").innerHTML = "By " + document.getElementById("news_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("news_article_3_headline_link").innerHTML = document.getElementById("news_article_3_headline_text").value;
+    document.getElementById("news_article_3_headline_link").href = document.getElementById("news_article_3_links_text").value;
+    document.getElementById("news_article_3_excerpt").innerHTML = document.getElementById("news_article_3_excerpt_text").value;
+    document.getElementById("news_article_3_byline_link").href = document.getElementById("news_article_3_links_text").value;
+    document.getElementById("news_article_3_byline").innerHTML = "By " + document.getElementById("news_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("ops_article_1_headline_link").innerHTML = document.getElementById("ops_article_1_headline_text").value;
+    document.getElementById("ops_article_1_headline_link").href = document.getElementById("ops_article_1_links_text").value;
+    document.getElementById("ops_article_1_excerpt").innerHTML = document.getElementById("ops_article_1_excerpt_text").value;
+    document.getElementById("ops_article_1_byline_link").href = document.getElementById("ops_article_1_links_text").value;
+    document.getElementById("ops_article_1_byline").innerHTML = "By " + document.getElementById("ops_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("ops_article_2_headline_link").innerHTML = document.getElementById("ops_article_2_headline_text").value;
+    document.getElementById("ops_article_2_headline_link").href = document.getElementById("ops_article_2_links_text").value;
+    document.getElementById("ops_article_2_excerpt").innerHTML = document.getElementById("ops_article_2_excerpt_text").value;
+    document.getElementById("ops_article_2_byline_link").href = document.getElementById("ops_article_2_links_text").value;
+    document.getElementById("ops_article_2_byline").innerHTML = "By " + document.getElementById("ops_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("ops_article_3_headline_link").innerHTML = document.getElementById("ops_article_3_headline_text").value;
+    document.getElementById("ops_article_3_headline_link").href = document.getElementById("ops_article_3_links_text").value;
+    document.getElementById("ops_article_3_excerpt").innerHTML = document.getElementById("ops_article_3_excerpt_text").value;
+    document.getElementById("ops_article_3_byline_link").href = document.getElementById("ops_article_3_links_text").value;
+    document.getElementById("ops_article_3_byline").innerHTML = "By " + document.getElementById("ops_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("sports_article_1_headline_link").innerHTML = document.getElementById("sports_article_1_headline_text").value;
+    document.getElementById("sports_article_1_headline_link").href = document.getElementById("sports_article_1_links_text").value;
+    document.getElementById("sports_article_1_excerpt").innerHTML = document.getElementById("sports_article_1_excerpt_text").value;
+    document.getElementById("sports_article_1_byline_link").href = document.getElementById("sports_article_1_links_text").value;
+    document.getElementById("sports_article_1_byline").innerHTML = "By " + document.getElementById("sports_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("sports_article_2_headline_link").innerHTML = document.getElementById("sports_article_2_headline_text").value;
+    document.getElementById("sports_article_2_headline_link").href = document.getElementById("sports_article_2_links_text").value;
+    document.getElementById("sports_article_2_excerpt").innerHTML = document.getElementById("sports_article_2_excerpt_text").value;
+    document.getElementById("sports_article_2_byline_link").href = document.getElementById("sports_article_2_links_text").value;
+    document.getElementById("sports_article_2_byline").innerHTML = "By " + document.getElementById("sports_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("sports_article_3_headline_link").innerHTML = document.getElementById("sports_article_3_headline_text").value;
+    document.getElementById("sports_article_3_headline_link").href = document.getElementById("sports_article_3_links_text").value;
+    document.getElementById("sports_article_3_excerpt").innerHTML = document.getElementById("sports_article_3_excerpt_text").value;
+    document.getElementById("sports_article_3_byline_link").href = document.getElementById("sports_article_3_links_text").value;
+    document.getElementById("sports_article_3_byline").innerHTML = "By " + document.getElementById("sports_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("arts-life_article_1_headline_link").innerHTML = document.getElementById("arts-life_article_1_headline_text").value;
+    document.getElementById("arts-life_article_1_headline_link").href = document.getElementById("arts-life_article_1_links_text").value;
+    document.getElementById("arts-life_article_1_excerpt").innerHTML = document.getElementById("arts-life_article_1_excerpt_text").value;
+    document.getElementById("arts-life_article_1_byline_link").href = document.getElementById("arts-life_article_1_links_text").value;
+    document.getElementById("arts-life_article_1_byline").innerHTML = "By " + document.getElementById("arts-life_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("arts-life_article_2_headline_link").innerHTML = document.getElementById("arts-life_article_2_headline_text").value;
+    document.getElementById("arts-life_article_2_headline_link").href = document.getElementById("arts-life_article_2_links_text").value;
+    document.getElementById("arts-life_article_2_excerpt").innerHTML = document.getElementById("arts-life_article_2_excerpt_text").value;
+    document.getElementById("arts-life_article_2_byline_link").href = document.getElementById("arts-life_article_2_links_text").value;
+    document.getElementById("arts-life_article_2_byline").innerHTML = "By " + document.getElementById("arts-life_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("arts-life_article_3_headline_link").innerHTML = document.getElementById("arts-life_article_3_headline_text").value;
+    document.getElementById("arts-life_article_3_headline_link").href = document.getElementById("arts-life_article_3_links_text").value;
+    document.getElementById("arts-life_article_3_excerpt").innerHTML = document.getElementById("arts-life_article_3_excerpt_text").value;
+    document.getElementById("arts-life_article_3_byline_link").href = document.getElementById("arts-life_article_3_links_text").value;
+    document.getElementById("arts-life_article_3_byline").innerHTML = "By " + document.getElementById("arts-life_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("grind_article_1_headline_link").innerHTML = document.getElementById("grind_article_1_headline_text").value;
+    document.getElementById("grind_article_1_headline_link").href = document.getElementById("grind_article_1_links_text").value;
+    document.getElementById("grind_article_1_excerpt").innerHTML = document.getElementById("grind_article_1_excerpt_text").value;
+    document.getElementById("grind_article_1_byline_link").href = document.getElementById("grind_article_1_links_text").value;
+    document.getElementById("grind_article_1_byline").innerHTML = "By " + document.getElementById("grind_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("grind_article_2_headline_link").innerHTML = document.getElementById("grind_article_2_headline_text").value;
+    document.getElementById("grind_article_2_headline_link").href = document.getElementById("grind_article_2_links_text").value;
+    document.getElementById("grind_article_2_excerpt").innerHTML = document.getElementById("grind_article_2_excerpt_text").value;
+    document.getElementById("grind_article_2_byline_link").href = document.getElementById("grind_article_2_links_text").value;
+    document.getElementById("grind_article_2_byline").innerHTML = "By " + document.getElementById("grind_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("grind_article_3_headline_link").innerHTML = document.getElementById("grind_article_3_headline_text").value;
+    document.getElementById("grind_article_3_headline_link").href = document.getElementById("grind_article_3_links_text").value;
+    document.getElementById("grind_article_3_excerpt").innerHTML = document.getElementById("grind_article_3_excerpt_text").value;
+    document.getElementById("grind_article_3_byline_link").href = document.getElementById("grind_article_3_links_text").value;
+    document.getElementById("grind_article_3_byline").innerHTML = "By " + document.getElementById("grind_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+    
+    document.getElementById("satire_article_1_headline_link").innerHTML = document.getElementById("satire_article_1_headline_text").value;
+    document.getElementById("satire_article_1_headline_link").href = document.getElementById("satire_article_1_links_text").value;
+    document.getElementById("satire_article_1_excerpt").innerHTML = document.getElementById("satire_article_1_excerpt_text").value;
+    document.getElementById("satire_article_1_byline_link").href = document.getElementById("satire_article_1_links_text").value;
+    document.getElementById("satire_article_1_byline").innerHTML = "By " + document.getElementById("satire_article_1_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("satire_article_2_headline_link").innerHTML = document.getElementById("satire_article_2_headline_text").value;
+    document.getElementById("satire_article_2_headline_link").href = document.getElementById("satire_article_2_links_text").value;
+    document.getElementById("satire_article_2_excerpt").innerHTML = document.getElementById("satire_article_2_excerpt_text").value;
+    document.getElementById("satire_article_2_byline_link").href = document.getElementById("satire_article_2_links_text").value;
+    document.getElementById("satire_article_2_byline").innerHTML = "By " + document.getElementById("satire_article_2_byline_text").value + "&nbsp&nbsp●&nbsp";
+
+    document.getElementById("satire_article_3_headline_link").innerHTML = document.getElementById("satire_article_3_headline_text").value;
+    document.getElementById("satire_article_3_headline_link").href = document.getElementById("satire_article_3_links_text").value;
+    document.getElementById("satire_article_3_excerpt").innerHTML = document.getElementById("satire_article_3_excerpt_text").value;
+    document.getElementById("satire_article_3_byline_link").href = document.getElementById("satire_article_3_links_text").value;
+    document.getElementById("satire_article_3_byline").innerHTML = "By " + document.getElementById("satire_article_3_byline_text").value + "&nbsp&nbsp●&nbsp";
+}
+function get_email_body() {
+    var the_string = document.documentElement.innerHTML;
+
+    // For News
+    if (document.getElementById("news_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR (N|R)EWS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR NEWS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("news_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR (N|R)EWS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR NEWS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("news_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR (N|R)EWS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR NEWS ARTICLE DELETION-->){1})/g, '');
+    }
+    
+    // For Opinions
+    if (document.getElementById("ops_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR OPI(N|R)IONS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR OPINIONS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("ops_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR OPI(N|R)IONS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR OPINIONS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("ops_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR OPI(N|R)IONS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR OPINIONS ARTICLE DELETION-->){1})/g, '');
+    }
+
+    // For Sports
+    if (document.getElementById("sports_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR SPO(X|R)TS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SPORTS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("sports_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR SPO(X|R)TS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SPORTS ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("sports_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR SPO(X|R)TS ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SPORTS ARTICLE DELETION-->){1})/g, '');
+    }
+    
+    // For Arts & Life
+    if (document.getElementById("arts-life_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR A(X|R)TS & LIFE ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR ARTS & LIFE ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("arts-life_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR A(X|R)TS & LIFE ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR ARTS & LIFE ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("arts-life_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR A(X|R)TS & LIFE ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR ARTS & LIFE ARTICLE DELETION-->){1})/g, '');
+    }
+
+    // For The Grind
+    if (document.getElementById("grind_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR G(X|R)IND ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR GRIND ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("grind_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR G(X|R)IND ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR GRIND ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("grind_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR G(X|R)IND ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR GRIND ARTICLE DELETION-->){1})/g, '');
+    }
+
+    // For Satire
+    if (document.getElementById("satire_article_1_links_text").value === '') {
+        the_string = the_string.replace(/((<!--THIRD REGEX FOR SATI(X|R)E ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SATIRE ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("satire_article_2_links_text").value === '') {
+        the_string = the_string.replace(/((<!--SECOND REGEX FOR SATI(X|R)E ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SATIRE ARTICLE DELETION-->){1})/g, '');
+    } else if (document.getElementById("satire_article_3_links_text").value === '') {
+        the_string = the_string.replace(/((<!--FIRST REGEX FOR SATI(X|R)E ARTICLE DELETION-->){1}(.|\n|\r|\t)*(<!--START REGEX FOR SATIRE ARTICLE DELETION-->){1})/g, '');
+    }
+
+    the_string = the_string.replace(/((.|\n|\r|\t)*(<!--DELETE EVER(X|Y)THING UP TO AND INCLUDING THIS LINE-->){1})/g, '');
+    the_string = the_string.replace(/((<!--DELETE THIS LI(R|N)E AND EVERYTHING BELOW IT-->){1}(.|\n|\r|\t)*)/g, '');
+
+    document.getElementById("Mailchimp_output").value = the_string;
+}
+</script>
 
 <!--DELETE EVERYTHING UP TO AND INCLUDING THIS LINE-->
 <!--PASTE ALL OF THIS IN MAILCHIMP BELOW THE "DOCTYPE" LINE-->
@@ -551,7 +734,7 @@
                           <td valign="top" align="center">
                             <table width="275" border="0" cellspacing="0" cellpadding="0" align="left" class="em_wrapper">
                               <tr>
-                                <td height="20" style="font-size:1px;line-height:1px;"> </td>
+                                <td height="20" style="font-size:1px;line-height:1px;"> </td>
 
                               </tr>
                             </table>
@@ -566,7 +749,7 @@
                                 </td>
                               </tr>
                               <tr>
-                                <td height="35" class="em_height"> </td>
+                                <td height="35" class="em_height"> </td>
                               </tr>
                               <tr>
                                 <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
@@ -580,7 +763,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td height="16" style="font-size:1px;line-height:1px;"> </td>
+                    <td height="16" style="font-size:1px;line-height:1px;"> </td>
                   </tr>
                 </table>
               </td>
@@ -599,7 +782,7 @@
               <td align="center" valign="top" style="padding:0 50px;" class="em_aside">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
                   <!--<tr>
-                    <td height="30" class="em_height"> </td>
+                    <td height="30" class="em_height"> </td>
                  </tr>
                   <tr>
                     <td align="center" valign="top">
@@ -607,7 +790,7 @@
                     </td>
                   </tr>-->
                   <!--<tr>
-                    <td height="30" class="em_height"> </td>
+                    <td height="30" class="em_height"> </td>
                   </tr>
                   <tr>
                   <td align="center" valign="top">
@@ -617,23 +800,23 @@
                   
 
                   <tr>
-                    <td height="30" class="em_height"> </td>
+                    <td height="30" class="em_height"> </td>
                   </tr>
                   <tr>
                     <td align="center" valign="top">
                       <a href="https://www.stanforddaily.com/" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/cropped-DailyLogo-CardinalRed.png" width="600" height="180" alt="" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
                     </td>
-                    <td height="20" style="font-size:1px;line-height:1px;"> </td>
+                    <td height="20" style="font-size:1px;line-height:1px;"> </td>
                   </tr>
                   </tr>
                     <tr>
-                    <td height="10" style="font-size:1px;line-height:1px;"> </td>
+                    <td height="10" style="font-size:1px;line-height:1px;"> </td>
                   </tr>
                   <tr>
 
             </tr>
                   <!--<tr>
-                    <td height="10" class="em_height"> </td>
+                    <td height="10" class="em_height"> </td>
                   </tr>
                   <tr>
                     <td align="center" valign="top">
@@ -643,7 +826,7 @@
           <tr>
             </tr>
                   <tr>
-                    <td height="25" class="em_height"> </td>
+                    <td height="25" class="em_height"> </td>
                   </tr>
                   <tr>
                     <td align="center" valign="top">
@@ -651,7 +834,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td height="25" class="em_height"> </td>
+                    <td height="25" class="em_height"> </td>
                   </tr>
                   <tr>
                     <td align="left" valign="top" class="em_defaultlink" mc:edit="teh" style="font-family:'Open Sans', Arial, sans-serif;font-size:25.5px;line-height:31.5px;color:#000000;font-weight:bold;padding-bottom:12px;"><a id="featured_content_headline_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations/">Stanford to discontinue 11 varsity sports
@@ -665,10 +848,10 @@
                 </tr>
                 <tr>
                   <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-                    <span id="featured_content_byline" style="font-weight:bold; color:#5b5b5b;">By Cybele Zhang and Jeremy Rubin      ●  </span><a id="featured_content_read_more_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> READ MORE »</span></a>
+                    <span id="featured_content_byline" style="font-weight:bold; color:#5b5b5b;">By Cybele Zhang and Jeremy Rubin      ●  </span><a id="featured_content_read_more_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> READ MORE »</span></a>
                   </td>
                   <tr>
-                    <td height="25" class="em_height"> </td>
+                    <td height="25" class="em_height"> </td>
                   </tr>
                 <tr>
                   <td valign="top" align="center">
@@ -697,7 +880,7 @@
           </td>
        </tr>
         <tr>
-          <td height="10" class="em_height"> </td>
+          <td height="10" class="em_height"> </td>
         </tr>
         <tr>
           <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a href="https://www.stanforddaily.com/2020/05/26/flora-fauna-of-campus/">Flora and fauna of campus
@@ -710,9 +893,9 @@
       </tr>
       <tr>
         <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-          <span style="font-weight:bold; color:#5b5b5b;">By Michael Byun    ●  </span><a href="https://www.stanforddaily.com/2020/05/26/flora-fauna-of-campus/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color14;font-weight:bold;margin-bottom:5px;">READ NOW »</span></a>
+          <span style="font-weight:bold; color:#5b5b5b;">By Michael Byun    ●  </span><a href="https://www.stanforddaily.com/2020/05/26/flora-fauna-of-campus/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color14;font-weight:bold;margin-bottom:5px;">READ NOW »</span></a>
         </td> <tr>
-          <td height="10" class="em_height"> </td>
+          <td height="10" class="em_height"> </td>
         </tr>-->
           
     
@@ -727,7 +910,7 @@
                 </td>
               </tr>
               <tr>
-                <td height="10" class="em_height"> </td>
+                <td height="10" class="em_height"> </td>
             </tr>
               <tr>
               <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a href="https://open.spotify.com/episode/0CsGRQEXqsw0oFH0UciJyh?si=Q19GfX5pTZiPn48cN5EdPw">Protests in Evanston
@@ -741,12 +924,12 @@
           </tr>
           <tr>
             <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-              <span style="font-weight:bold; color:#5b5b5b;">By Ellie Wong and Sarah Bloom  ●  </span><a href="https://open.spotify.com/episode/0CsGRQEXqsw0oFH0UciJyh?si=Q19GfX5pTZiPn48cN5EdPw"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">LISTEN NOW »</span>
+              <span style="font-weight:bold; color:#5b5b5b;">By Ellie Wong and Sarah Bloom  ●  </span><a href="https://open.spotify.com/episode/0CsGRQEXqsw0oFH0UciJyh?si=Q19GfX5pTZiPn48cN5EdPw"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">LISTEN NOW »</span>
               </a>
             </td>
               </tr>
             <tr>
-             <td height="25" class="em_height"> </td>
+             <td height="25" class="em_height"> </td>
           </tr>
           <tr>
       <td align="center" valign="top" style="font-size:0px;line-height:0px;height:3px;">
@@ -758,7 +941,7 @@
           </td>
        </tr>
         <tr>
-          <td height="10" class="em_height"> </td>
+          <td height="10" class="em_height"> </td>
         </tr>
         
         <tr>
@@ -776,11 +959,11 @@
       </tr>
       <tr>
         <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-          <span style="font-weight:bold; color:#5b5b5b;">By Lucia Morris   ●  </span><a href="https://www.stanforddaily.com/2020/06/24/the-invisible-minority-fli-students-and-online-learning/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">SEE THE DATA »</span></a>
+          <span style="font-weight:bold; color:#5b5b5b;">By Lucia Morris   ●  </span><a href="https://www.stanforddaily.com/2020/06/24/the-invisible-minority-fli-students-and-online-learning/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">SEE THE DATA »</span></a>
         </td>
       </tr>
       <tr>
-      <td height="25" class="em_height"> </td>
+      <td height="25" class="em_height"> </td>
     </tr>-->
     <!--THIRD REGEX FOR NEWS ARTICLE DELETION-->
           <tr>
@@ -793,7 +976,7 @@
                 </td>
               </tr>
               <tr>
-                <td height="10" class="em_height"> </td>
+                <td height="10" class="em_height"> </td>
             </tr>
             <tr>
            		<td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;">
@@ -808,11 +991,11 @@
           	</tr>
           	<tr>
             	<td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-              	<span id="news_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Anastasia Malenko   ●  </span><a id="news_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/irrational-and-punitive-faculty-join-students-in-opposing-ice-directive/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+              	<span id="news_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Anastasia Malenko   ●  </span><a id="news_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/irrational-and-punitive-faculty-join-students-in-opposing-ice-directive/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
             	</td>
             </tr>
             <tr>
-            	<td height="25" class="em_height"> </td>
+            	<td height="25" class="em_height"> </td>
               </tr>
               <!--SECOND REGEX FOR NEWS ARTICLE DELETION-->
             <tr>
@@ -829,7 +1012,7 @@
           	</tr>
           	<tr>
             	<td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-              	<span id="news_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Vivian Jiang   ●  </span><a id="news_article_2_byline_link" href="https://stanforddaily.com/2020/07/10/the-tree-wears-the-sorting-hat-how-re-approaching-stanford-shakes-out-next-to-peer-institutions/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+              	<span id="news_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Vivian Jiang   ●  </span><a id="news_article_2_byline_link" href="https://stanforddaily.com/2020/07/10/the-tree-wears-the-sorting-hat-how-re-approaching-stanford-shakes-out-next-to-peer-institutions/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
             	</td>
             </tr>
             <tr>
@@ -850,7 +1033,7 @@
            </tr>
            <tr>
              <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-               <span id="news_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Vivian Jiang   ●  </span><a id="news_article_3_byline_link" href="https://stanforddaily.com/2020/07/10/the-tree-wears-the-sorting-hat-how-re-approaching-stanford-shakes-out-next-to-peer-institutions/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+               <span id="news_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Vivian Jiang   ●  </span><a id="news_article_3_byline_link" href="https://stanforddaily.com/2020/07/10/the-tree-wears-the-sorting-hat-how-re-approaching-stanford-shakes-out-next-to-peer-institutions/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
              </td>
          </tr>
          <tr>
@@ -868,7 +1051,7 @@
           </td>
         </tr>
        <tr>
-          <td height="10" class="em_height"> </td>
+          <td height="10" class="em_height"> </td>
         </tr>
         <tr>
           <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a id="ops_article_1_headline_link" href="https://stanforddaily.com/2020/07/11/shelter-in-a-pandemic-stanford-housing-policies-fail-fli-and-housing-insecure-students/">Shelter in a Pandemic: Stanford housing policies fail FLI and housing-insecure students
@@ -884,7 +1067,7 @@
       <tr>
         <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:18px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
           <span id="ops_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Lizzie Avila, Kimberly Batdorf, Jess Dominick, Kevin Longoria and Ayush Pandit
-   ●  </span><a id="ops_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/shelter-in-a-pandemic-stanford-housing-policies-fail-fli-and-housing-insecure-students/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+   ●  </span><a id="ops_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/shelter-in-a-pandemic-stanford-housing-policies-fail-fli-and-housing-insecure-students/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
         </td>
      </tr>
     <tr>
@@ -906,11 +1089,11 @@
 <tr>
   <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
     <span id="ops_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Op-Ed
-  ●  </span><a id="ops_article_2_byline_link" href="https://stanforddaily.com/2020/07/11/letter-to-the-community-take-action-on-workers-petition-for-hazard-pay/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+  ●  </span><a id="ops_article_2_byline_link" href="https://stanforddaily.com/2020/07/11/letter-to-the-community-take-action-on-workers-petition-for-hazard-pay/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
   </td>
 </tr>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
     <!--FIRST REGEX FOR OPINIONS ARTICLE DELETION-->
   <tr>
@@ -928,11 +1111,11 @@
       <tr>
         <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
           <span id="ops_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Op-Ed
-   ●  </span><a id="ops_article_3_byline_link" href="https://stanforddaily.com/2020/07/11/letter-to-the-community-take-action-on-workers-petition-for-hazard-pay/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+   ●  </span><a id="ops_article_3_byline_link" href="https://stanforddaily.com/2020/07/11/letter-to-the-community-take-action-on-workers-petition-for-hazard-pay/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
         </td>
       </tr>
     <tr>
-      <td height="25" class="em_height"> </td>
+      <td height="25" class="em_height"> </td>
       </tr>
       <!--START REGEX FOR OPINIONS ARTICLE DELETION-->
       <!--THIRD REGEX FOR SPORTS ARTICLE DELETION-->
@@ -946,7 +1129,7 @@
 </td>
 </tr>
 <tr></tr>
-<td height="10" class="em_height"> </td>
+<td height="10" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a id="sports_article_1_headline_link" href="https://stanforddaily.com/2020/07/11/sports-conference-only/">Pac-12 moves to conference-only model for 4 fall sports
@@ -960,12 +1143,12 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="sports_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Lydia Chen  ●  </span><a id="sports_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/sports-conference-only/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="sports_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Lydia Chen  ●  </span><a id="sports_article_1_byline_link" href="https://stanforddaily.com/2020/07/11/sports-conference-only/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </td>
 </tr>
 <tr></tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--SECOND REGEX FOR SPORTS ARTICLE DELETION-->
 <tr>
@@ -980,12 +1163,12 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="sports_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Daniel Martinez-Krams  ●  </span><a id="sports_article_2_byline_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations-muir/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="sports_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Daniel Martinez-Krams  ●  </span><a id="sports_article_2_byline_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations-muir/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </td>
 </tr>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--FIRST REGEX FOR SPORTS ARTICLE DELETION-->
 <tr>
@@ -1000,12 +1183,12 @@
     </tr>
     <tr>
     <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-    <span id="sports_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Daniel Martinez-Krams  ●  </span><a id="sports_article_3_byline_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations-muir/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+    <span id="sports_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Daniel Martinez-Krams  ●  </span><a id="sports_article_3_byline_link" href="https://stanforddaily.com/2020/07/08/sports-cancellations-muir/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
     </td>
     </td>
     </tr>
     <tr>
-    <td height="25" class="em_height"> </td>
+    <td height="25" class="em_height"> </td>
     </tr>
 <!--START REGEX FOR SPORTS ARTICLE DELETION-->
     <!--<tr>
@@ -1036,7 +1219,7 @@
           </tr>
           <tr>
             <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-              <span style="font-weight:bold; color:#5b5b5b;">By Inyoung Choi    ●  </span><a href="https://www.stanforddaily.com/2020/06/13/choi-the-remaining-assignment/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+              <span style="font-weight:bold; color:#5b5b5b;">By Inyoung Choi    ●  </span><a href="https://www.stanforddaily.com/2020/06/13/choi-the-remaining-assignment/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
             </td>
           </tr>-->
           <!--<tr>
@@ -1071,7 +1254,7 @@
 </td>
 </tr>
 <tr>
-<td height="10" class="em_height"> </td>
+<td height="10" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a id="arts-life_article_1_headline_link" href="https://stanforddaily.com/2020/07/09/live-musicians-explore-music-production-quarantine-style/">Live musicians explore music production, quarantine-style
@@ -1084,10 +1267,10 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="arts-life_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Sophie Sullivan  ●  </span><a id="arts-life_article_1_byline_link" href="https://stanforddaily.com/2020/07/09/live-musicians-explore-music-production-quarantine-style/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="arts-life_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Sophie Sullivan  ●  </span><a id="arts-life_article_1_byline_link" href="https://stanforddaily.com/2020/07/09/live-musicians-explore-music-production-quarantine-style/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--SECOND REGEX FOR ARTS & LIFE ARTICLE DELETION-->
 <tr>
@@ -1101,10 +1284,10 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="arts-life_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Angelina Hue and Jonathan Arnold   ●  </span><a id="arts-life_article_2_byline_link" href="https://stanforddaily.com/2020/07/08/introducing-alice-wu-a-qa-with-the-director-of-the-half-of-it/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="arts-life_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Angelina Hue and Jonathan Arnold   ●  </span><a id="arts-life_article_2_byline_link" href="https://stanforddaily.com/2020/07/08/introducing-alice-wu-a-qa-with-the-director-of-the-half-of-it/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--FIRST REGEX FOR ARTS & LIFE ARTICLE DELETION-->
 <tr>
@@ -1118,10 +1301,10 @@
     </tr>
     <tr>
     <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-    <span id="arts-life_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Angelina Hue and Jonathan Arnold   ●  </span><a id="arts-life_article_3_byline_link" href="https://stanforddaily.com/2020/07/08/introducing-alice-wu-a-qa-with-the-director-of-the-half-of-it/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+    <span id="arts-life_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Angelina Hue and Jonathan Arnold   ●  </span><a id="arts-life_article_3_byline_link" href="https://stanforddaily.com/2020/07/08/introducing-alice-wu-a-qa-with-the-director-of-the-half-of-it/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
     </td>
     <tr>
-    <td height="25" class="em_height"> </td>
+    <td height="25" class="em_height"> </td>
     </tr>
 <!--START REGEX FOR ARTS & LIFE ARTICLE DELETION-->
 <!--<tr>
@@ -1141,9 +1324,9 @@
       </tr>
       <tr>
         <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-          <span style="font-weight:bold; color:#5b5b5b;">By Kamilah Arteaga   ●  </span><a href="https://www.stanforddaily.com/2020/06/03/filoli-house-and-garden-the-peninsulas-secret-spot/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">VIEW PHOTOS »</span></a>
+          <span style="font-weight:bold; color:#5b5b5b;">By Kamilah Arteaga   ●  </span><a href="https://www.stanforddaily.com/2020/06/03/filoli-house-and-garden-the-peninsulas-secret-spot/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">VIEW PHOTOS »</span></a>
         </td> <tr>
-          <td height="25" class="em_height"> </td>
+          <td height="25" class="em_height"> </td>
         </tr>-->
         <!--THIRD REGEX FOR GRIND ARTICLE DELETION-->
 <tr>
@@ -1156,7 +1339,7 @@
 </td>
 </tr>
 <tr>
-<td height="10" class="em_height"> </td>
+<td height="10" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a id="grind_article_1_headline_link" href="https://stanforddaily.com/2020/07/06/little-manila-i-a-southside-story/">Little Manila &amp I: A Southside Story
@@ -1173,11 +1356,11 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="grind_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Karlaine Francisco  ●  </span><a id="grind_article_1_byline_link" href="https://stanforddaily.com/2020/07/06/little-manila-i-a-southside-story/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="grind_article_1_byline" style="font-weight:bold; color:#5b5b5b;">By Karlaine Francisco  ●  </span><a id="grind_article_1_byline_link" href="https://stanforddaily.com/2020/07/06/little-manila-i-a-southside-story/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </tr>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--SECOND REGEX FOR GRIND ARTICLE DELETION-->
 <tr>
@@ -1191,11 +1374,11 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="grind_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Sarah Bloom ●  </span><a id="grind_article_2_byline_link" href="https://www.stanforddaily.com/2020/06/02/photographing-the-evanston-youth-march/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="grind_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Sarah Bloom ●  </span><a id="grind_article_2_byline_link" href="https://www.stanforddaily.com/2020/06/02/photographing-the-evanston-youth-march/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </tr>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <!--FIRST REGEX FOR GRIND ARTICLE DELETION-->
 <tr>
@@ -1209,11 +1392,11 @@
     </tr>
     <tr>
     <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-    <span id="grind_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Sarah Bloom ●  </span><a id="grind_article_3_byline_link" href="https://www.stanforddaily.com/2020/06/02/photographing-the-evanston-youth-march/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+    <span id="grind_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Sarah Bloom ●  </span><a id="grind_article_3_byline_link" href="https://www.stanforddaily.com/2020/06/02/photographing-the-evanston-youth-march/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
     </td>
     </tr>
     <tr>
-    <td height="25" class="em_height"> </td>
+    <td height="25" class="em_height"> </td>
     </tr>
 <!--START REGEX FOR GRIND ARTICLE DELETION-->
 <!--</tr>
@@ -1229,10 +1412,10 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span style="font-weight:bold; color:#5b5b5b;">By Nestor Walters  ●  </span><a href="https://www.stanforddaily.com/2020/05/10/the-swan-a-mothers-day-dedication/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span style="font-weight:bold; color:#5b5b5b;">By Nestor Walters  ●  </span><a href="https://www.stanforddaily.com/2020/05/10/the-swan-a-mothers-day-dedication/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>-->
 <!--THIRD REGEX FOR SATIRE ARTICLE DELETION-->
 <tr>
@@ -1279,7 +1462,7 @@
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-<span id="satire_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Prateek Joshi   ●  </span><a id="satire_article_2_byline_link" href="https://www.stanforddaily.com/2020/05/11/director-of-u-s-fish-and-wildlife-service-holds-press-conference-to-distinguish-between-the-two/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+<span id="satire_article_2_byline" style="font-weight:bold; color:#5b5b5b;">By Prateek Joshi   ●  </span><a id="satire_article_2_byline_link" href="https://www.stanforddaily.com/2020/05/11/director-of-u-s-fish-and-wildlife-service-holds-press-conference-to-distinguish-between-the-two/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
 </td>
 </tr>
 <tr>
@@ -1297,7 +1480,7 @@
     </tr>
     <tr>
     <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-    <span id="satire_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Prateek Joshi   ●  </span><a id="satire_article_3_byline_link" href="https://www.stanforddaily.com/2020/05/11/director-of-u-s-fish-and-wildlife-service-holds-press-conference-to-distinguish-between-the-two/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
+    <span id="satire_article_3_byline" style="font-weight:bold; color:#5b5b5b;">By Prateek Joshi   ●  </span><a id="satire_article_3_byline_link" href="https://www.stanforddaily.com/2020/05/11/director-of-u-s-fish-and-wildlife-service-holds-press-conference-to-distinguish-between-the-two/"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;">READ MORE »</span></a>
     </td>
     </tr>
     <tr>
@@ -1315,7 +1498,7 @@
 </tr>
 
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
 <tr>-
                     <td align="center" valign="top">
@@ -1328,7 +1511,7 @@
 </td>
 </tr>
                   
-<tr><td height="25" class="em_height"> </td>
+<tr><td height="25" class="em_height"> </td>
 </tr>
 <tr>
                     <td align="center" valign="top">
@@ -1341,10 +1524,10 @@
 </td>
 </tr>
                   <tr>
-<td height="25" class="em_height"> </td>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>
-<tr><td height="25" class="em_height"> </td>
+<tr><td height="25" class="em_height"> </td>
 </tr>
 <tr>
                     <td align="center" valign="top">
@@ -1357,7 +1540,7 @@
 </td>
 </tr>
 <tr>
-<td height="25" class="em_height"> </td>
+<td height="25" class="em_height"> </td>
 </tr>-->
 <!--<tr>
             <td align="center" valign="top" style="font-size:0px;line-height:0px;height:3px;">
@@ -1369,7 +1552,7 @@
           </td>
         </tr>
         <tr>
-        <td height="10" class="em_height"> </td>
+        <td height="10" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#000000;font-weight:900;padding-bottom:12px;"><a href="https://www.stanforddaily.com/voting-members/">Election results
@@ -1387,7 +1570,7 @@
 </td>
 </tr>
 <tr>
-        <td height="10" class="em_height"> </td>
+        <td height="10" class="em_height"> </td>
 </tr>-->
 
 </table>
@@ -1405,7 +1588,7 @@
 <td align="center" valign="top" bgcolor="#8c1514" style="padding:0px;" class="em_aside">
 <table align="center" width="560" border="0" cellspacing="0" cellpadding="0" class="em_wrapper" style="width:560px;">
 <tr>
-<td height="5" class="em_height"> </td>
+<td height="5" class="em_height"> </td>
 </tr>
 <!--//Footer-->
 <tr>
@@ -1414,7 +1597,7 @@
 </td>
 </tr>
 <tr>
-<td height="5" class="em_height"> </td>
+<td height="5" class="em_height"> </td>
 </tr>
 </table>
 <!--End of this one-->
@@ -1428,7 +1611,7 @@
 <td valign="top" align="center">
 <table width="190" border="0" cellspacing="0" cellpadding="0" align="left" class="em_wrapper" style="width:190px;">
 <tr>
-<td height="30" class="em_height"> </td>
+<td height="30" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" mc:edit="footer1" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:15px;color:#ffffff;">
@@ -1443,7 +1626,7 @@
 </td>
 </tr>
 <tr>
-<td height="47" class="em_height"> </td>
+<td height="47" class="em_height"> </td>
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" mc:edit="footer2" style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#ff1061;padding-bottom:20px;">
@@ -1462,7 +1645,7 @@
 <![endif]-->
 <table width="325" border="0" cellspacing="0" cellpadding="0" align="right" class="em_wrapper" style="width:325px;">
 <tr>
-<td height="35" class="em_height"> </td>
+<td height="35" class="em_height"> </td>
 </tr>
 <tr>
 <td valign="top" align="right">
@@ -1474,15 +1657,15 @@
 <td align="center" valign="top">
 <a href="https://www.facebook.com/stanforddaily/" target="_blank" style="text-decoration:none;"><img mc:edit="fb" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/wfb.png" width="27" height="27" alt="Fb" style="display:block; font-family:Arial, sans-serif; font-size:12px;line-height:16px;color:#ffffff;font-weight:bold; max-width:27px;" border="0"></a>
 </td>
-<td width="12"> </td>
+<td width="12"> </td>
 <td align="center" valign="middle">
 <a href="https://www.instagram.com/stanforddaily/" target="_blank" style="text-decoration:none;"><img mc:edit="Pin" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/white_ig-e1573266355630.png" width="25" height="25" alt="Pin" style="display:block; font-family:Arial, sans-serif; font-size:12px;line-height:16px;color:#ffffff;font-weight:bold; max-width:30px;" border="0"></a>
 </td>
-<td width="8"> </td>
+<td width="8"> </td>
 <td align="center" valign="middle">
 <a href="https://twitter.com/StanfordDaily" target="_blank" style="text-decoration:none;"><img mc:edit="tw" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/wtwit.png" width="27" height="27" alt="Tw" style="display:block; font-family:Arial, sans-serif; font-size:12px;line-height:16px;color:#ffffff;font-weight:bold;max-width:27px;" border="0"></a>
 </td>
-<td width="11"> </td>
+<td width="11"> </td>
 <td align="center" valign="middle">
 <a href="https://www.youtube.com/user/TSDVideoMultimedia" target="_blank" style="text-decoration:none;"><img mc:edit="yt" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/1280px-YouTube_light_icon_2017.svg_.png" width="27" height="19" alt="Yt" style="display:block; font-family:Arial, sans-serif; font-size:12px;line-height:16px;color:#ffffff;font-weight:bold;max-width:27px;" border="0"></a>
 </td>
@@ -1494,7 +1677,7 @@
 </td>
 </tr>
 <tr>
-<td height="105" class="em_height"> </td>
+<td height="105" class="em_height"> </td>
 </tr>
 <tr>
 <td align="right" valign="top" class="em_white em_center" mc:edit="foter3" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:15px;color:#ffffff;padding-bottom:20px;">Don't want to receive these emails anymore? <a href="*|UNSUB|*" target="_blank" style="text-decoration:underline;color:#ffffff;">Unsubscribe</a>
@@ -1512,7 +1695,7 @@
 </td>
 </tr>
 </table>
-<div class="em_hide" style="white-space:nowrap;display:none;font-size:0px;line-height:0px;">                           </div>
+<div class="em_hide" style="white-space:nowrap;display:none;font-size:0px;line-height:0px;">                           </div>
 
 <!--DELETE THIS LINE AND EVERYTHING BELOW IT-->
 

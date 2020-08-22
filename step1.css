@@ -3,6 +3,24 @@
     color: goldenrod;
 }
 
+#featured_fields1 {
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-color: #8c1514;
+    border-radius: 25px;
+    background-color: lightcyan;
+}
+
+#featured_fields2 {
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-color: #8c1514;
+    border-radius: 25px;
+    background-color: lightpink;
+}
+
 #featured_fields3 {
     padding: 10px;
     margin: 10px;
