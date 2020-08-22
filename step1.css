@@ -1,6 +1,5 @@
 #the_title {
     padding-left: 10px;
-    color: goldenrod;
 }
 
 #featured_fields1 {
@@ -33,5 +32,4 @@
 textarea {
     width: 100%;
     height: 2vh;
-    
-    }
+}

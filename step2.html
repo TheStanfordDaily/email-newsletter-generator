@@ -1,24 +1,16 @@
-<!-- Step 1: Recap -->
-
-<!-- Step 1.0
-  This week, we'll be building out the logic for last week's html. 
-
-  We've pasted a segment of our own code below, but you should replace it 
-  with your work from last week. You can't always trust code that's given to you ;).
-
-  If you would like to, you can paste all of your work from last week. However,
-  we recommend just pasting in your featured content div. That way, we will have
-  a smaller amount of code to work with. After we've got this smaller segment of code working
-  then we can paste in the rest of your work and get that working as well! (Coding is all about
-  small changes, and starting from simpler cases of the eventual problem you're trying
-  to solve!)
+<!-- Step 2: Separation of powers, again :) -->
+<!--
+  Good coding practice includes organized code. Related code should go together.
 -->
-
 <!DOCTYPE html>
 
 <html>
   <head>
-    <link rel="stylesheet" href="step1.css">
+    <!-- Step 2.1
+      You'll have to copy over your css to a new file step2.css. Alternatively, you can
+      change the href here to point to your old css file.
+    -->
+    <link rel="stylesheet" href="step2.css">
   </head>
 
   <body>
@@ -41,13 +33,12 @@
     <button onclick="set_featured_content()">Submit all changes</button>
   </body>
 
-  <!-- Step 1.1 
-    Don't delete this! This is Javascript :o
-    Javascript is the focus of this week's lesson. 
+  <!-- Step 2.2
+    This Javascript is a bit out of place here, since the rest of our code is HTML.
+    We should move it to a different file! I recommend naming it "step2.js"
 
-    Once you paste in last week's code, change your onclick so that it calls
-    the function set_featured_content(). You'll know you succeeded if the alert
-    displays "You got it!!".
+    Here's a good source to get you started
+    https://www.w3schools.com/js/js_whereto.asp
   -->
   <script>
     function set_featured_content() {
