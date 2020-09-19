@@ -1,0 +1,48 @@
+<!-- Step 2: Separation of powers, again :) -->
+<!--
+  Good coding practice includes organized code. Related code should go together.
+-->
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <!-- Step 2.1
+      You'll have to copy over your css to a new file step2.css. Alternatively, you can
+      change the href here to point to your old css file.
+    -->
+    <link rel="stylesheet" href="step2.css">
+  </head>
+
+  <body>
+    <h1 id="the_title">So you wanna set up a Stanford Daily email newsletter?</h1>
+
+    <div id="featured_fields3">
+    <span>Featured content headline</span>
+    <textarea id="featured_content_headline_text"></textarea><br><br>
+    <span>Featured content author name(s); ex. "Susie Brubaker-Cole", "Susie Brubaker-Cole and Riva"</span>
+    <textarea id="featured_content_byline_text"></textarea><br><br>
+    <span>Featured content link</span>
+    <textarea id="featured_content_links_text"></textarea><br><br>
+    <span>Featured content image link</span>
+    <textarea id="featured_content_image_text"></textarea><br><br>
+    <span>Featured content image alt text (should describe photo in case it cannot be seen)</span>
+    <textarea id="featured_content_image_alt_text"></textarea><br><br>
+    <span>Featured content excerpt</span>
+    <textarea id="featured_content_excerpt_text"></textarea>
+    </div>
+    <button onclick="set_featured_content()">Submit all changes</button>
+  </body>
+
+  <!-- Step 2.2
+    This Javascript is a bit out of place here, since the rest of our code is HTML.
+    We should move it to a different file! I recommend naming it "step2.js"
+
+    Here's a good source to get you started
+    https://www.w3schools.com/js/js_whereto.asp
+  -->
+  <script>
+    function set_featured_content() {
+      alert("You got it!!");
+    }
+  </script>
+</html>
