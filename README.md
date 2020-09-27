@@ -27,4 +27,5 @@ Your branch is up to date with 'origin/tech-wksh-wk1-html-css'.
 7. Click the file icon in the top left of VS Code
 ![VSCode Explorer](assets/VSCodeExplorer.png)
 8. Find the file called `step1.html`. Click on it.
-9. Follow the steps in `step1.html` to get started! Once you're done with that, move on to `step2.html`, etc.
+![VSCode Step1](assets/VSCodeStep1.png)
+9.  Follow the steps in `step1.html` to get started! Once you're done with that, move on to `step2.html`, etc.
