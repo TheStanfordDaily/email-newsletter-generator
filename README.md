@@ -1,4 +1,4 @@
-# Stanford Daily Tech Workshop Week 1 Assignment
+# Stanford Daily Tech Workshop Week 1 Assignment (due 10/4)
 
 ## Getting started
 
@@ -29,3 +29,6 @@ Your branch is up to date with 'origin/tech-wksh-wk1-html-css'.
 8. Find the file called `step1.html`. Click on it.
 ![VSCode Step1](assets/VSCodeStep1.png)
 9.  Follow the steps in `step1.html` to get started! Once you're done with that, move on to `step2.html`, etc.
+
+## How to Submit?
+Done already? :D. Sit tight for now--we'll actually be covering how to submit assignment 1 during our week 2 section!
