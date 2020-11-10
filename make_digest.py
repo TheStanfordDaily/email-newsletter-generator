@@ -1,9 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
 
-digest_txt = "digest-11-9.txt"
+# Where's the list of articles to include in each section?
+DIGEST_IN = "digest-in.txt"
 
-# CONSTANTS
+# Where should the code be output?
+DIGEST_OUT = "digest-out.txt"
+
+# Header HTML in each digest
 DIGEST_HEADER = """
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -410,6 +414,7 @@ DIGEST_HEADER = """
 
 """
 
+# Footer HTML used in each digest
 DIGEST_FOOTER = """
 </tbody></table>
 </td>
@@ -683,17 +688,14 @@ def render_link(link, featured=False, is_cartoon=False):
 
     def render_subtitle():
         if not featured:
-            print("render_subtitle: not featured")
             return ""
 
         # subtitle in first <h2>
         h2s = soup.find_all("h2")
-        if not h2s:
-            print("render_subtitle: not h2s")
+        if not h2s: # article has no subhead
             return ""
         subtitle_text = h2s[0].get_text()
 
-        print("render_subtitle: found ", subtitle_text)
         return f"""
         <tr>
         <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
@@ -850,12 +852,11 @@ def render_digest(sections):
     """
 
 def write_digest(digest):
-    DIGEST_OUT = "digest-9-6-out.txt"
     print(f"Writing to {DIGEST_OUT}...")
     with open(DIGEST_OUT, "w") as o:
         o.write(BeautifulSoup(digest, "html.parser").prettify())
 
 
-txt_data = read_txt(digest_txt)
+txt_data = read_txt(DIGEST_IN)
 digest = render_digest(txt_data)
 write_digest(digest)
