@@ -639,11 +639,34 @@ def read_txt(txt):
 
     return articles_by_section
 
+def get_get_wp_excerpt():
+
+    # Searching " " turns up most (but potentially not all) recent articles with excerpts
+    excerpts_link = "https://stanforddaily.com/?s=+"
+    soup = BeautifulSoup(requests.get(excerpts_link).content, "html.parser")
+    articles = soup.find_all("article")
+
+    def get_wp_excerpt(headline):
+        for article in articles:
+            # Headline within headline attribute of second <h1> in <article>
+            try:
+                if headline == article.find_all("a")[1].get("title"):
+                    return article.find_all("div", {"class" : "css-901oao"})[1].get_text()
+            except:
+                return None
+
+    return get_wp_excerpt
+
+get_wp_excerpt = get_get_wp_excerpt()
+
 # functions render digest HTML
     
 def render_link(link, featured=False, is_cartoon=False):
     print(f"Processing {link}...")
     soup = BeautifulSoup(requests.get(link).content, "html.parser")
+
+    # headline in second <h1>
+    headline_text = soup.find_all("h1")[1].get_text()
 
     def render_image():
         if not featured and not is_cartoon:
@@ -667,8 +690,6 @@ def render_link(link, featured=False, is_cartoon=False):
         if is_cartoon:
             return ""
 
-        # headline in second <h1>
-        headline_text = soup.find_all("h1")[1].get_text()
         if featured:
             return f"""
             <tr>
@@ -714,9 +735,18 @@ def render_link(link, featured=False, is_cartoon=False):
         return ", ".join(names[:-2] + [" and ".join(names[-2:])])
 
     def get_excerpt():
-        #  try first paragraph in article
+
+        # Try searching for actual excerpt in WordPress
+        wp_excerpt = get_wp_excerpt(headline_text)
+        if wp_excerpt:
+            print("Found WP excerpt ", wp_excerpt)
+            return wp_excerpt
+
+        # Try first paragraph in article
         try:
-            return soup.find("div", id="main-article-text2").find("p").get_text()
+            first_graf_excerpt = soup.find("div", id="main-article-text2").find("p").get_text()
+            print("Found first paragraph excerpt ", first_graf_excerpt)
+            return first_graf_excerpt
         except:
             print("Could not find excerpt")
             return ""
