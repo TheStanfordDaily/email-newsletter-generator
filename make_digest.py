@@ -408,6 +408,11 @@ DIGEST_HEADER = """
                       <a href="https://www.stanforddaily.com/" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/cropped-DailyLogo-CardinalRed.png" width="600" height="180" alt="" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
                     </td>
                   </tr>
+		  <tr>
+                    <td>
+                      <div style="margin-top: 10px;"><a href="https://www.stanforddaily.com/donate/" style="margin-left:90px;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">DONATE</a><a href="https://www.stanforddaily.com/tips/" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT A TIP</a><a href="https://www.stanforddaily.com/submitting-to-the-daily/" style="border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;margin-right:90px;">SUBMIT WORK</a></div>
+                    </td>
+                  </tr>
                   <tr>
                     <td height="30" style="font-size:1px;line-height:1px;">&nbsp;</td>
                   </tr>
