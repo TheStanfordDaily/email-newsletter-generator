@@ -319,6 +319,16 @@ DIGEST_HEADER = """
           height:3px !important;
         }
       }
+      
+      .top_prompts a {
+         font-size: 1rem;
+      }
+    
+      @media screen and (max-width:640px) {
+         .top_prompts a {
+             font-size: 0.75em;
+         }
+      }
     </style>
       <body style="height: 100%;margin: 0 !important;padding: 0 !important;width: 100%;-ms-text-size-adjust: 100% !important;-webkit-text-size-adjust: 100% !important;background-color: #FAFAFA;-webkit-font-smoothing: antialiased !important;">
         <center>
@@ -410,7 +420,7 @@ DIGEST_HEADER = """
                   </tr>
 		  <tr>
                     <td>
-                      <div style="margin-top: 10px;"><a href="https://www.stanforddaily.com/donate/" style="margin-left:90px;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">DONATE</a><a href="https://www.stanforddaily.com/tips/" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT A TIP</a><a href="https://www.stanforddaily.com/submitting-to-the-daily/" style="border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;margin-right:90px;">SUBMIT WORK</a></div>
+                      <div class="top_prompts" style="display: flex;margin-top: 10px;"><a class="top_prompts" href="https://www.stanforddaily.com/tips/" style="margin-left:auto;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">SUBMIT A TIP</a><a class="top_prompts" href="https://www.stanforddaily.com/donate/" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">DONATE</a><a class="top_prompts" href="https://www.stanforddaily.com/submitting-to-the-daily/" style="margin-right:auto;border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT WORK</a></div>
                     </td>
                   </tr>
                   <tr>
