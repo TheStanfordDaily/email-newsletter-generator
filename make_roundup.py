@@ -2,10 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 
 # Where's the list of articles to include in each section?
-DIGEST_IN = "digest-in.txt"
+DIGEST_IN = "roundup-in.txt"
 
 # Where should the code be output?
-DIGEST_OUT = "digest-out.txt"
+DIGEST_OUT = "roundup-out.txt"
 
 # Header HTML in each digest
 DIGEST_HEADER = """
@@ -424,7 +424,9 @@ DIGEST_HEADER = """
                     </td>
                   </tr>
                   <tr>
-                    <td height="30" style="font-size:1px;line-height:1px;">&nbsp;</td>
+                    <td align="left" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:18px;color:#8c1514;font-weight:bold;padding-top: 10px; text-align:center;" valign="top">
+                    <a href="https://stanforddaily.com/category/news/">Weekend Roundup</a>
+                    </td>
                   </tr>
 
 """
@@ -624,6 +626,22 @@ DIGEST_FOOTER = """
 </html>
 """
 
+CATEGORY_PAGES = {
+    "news": "https://stanforddaily.com/category/news/",
+    "opinions": "https://stanforddaily.com/category/opinions/",
+    "sports": "https://stanforddaily.com/category/sports/",
+    "arts & life": "https://stanforddaily.com/category/arts-life/",
+    "the grind": "https://stanforddaily.com/category/thegrind/",
+    "satire": "https://stanforddaily.com/category/satire/",
+    "data": "https://stanforddaily.com/category/@94305/",
+    "podcasts": "https://stanforddaily.com/category/podcasts/",
+    "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
+    "cartoon of the week": "https://stanforddaily.com/category/cartoons/",
+    "cartoon of the day": "https://stanforddaily.com/category/cartoons/",
+    "cartoons": "https://stanforddaily.com/category/cartoons/",
+}
+ALL_SECTIONS = list(CATEGORY_PAGES.keys())
+
 def read_txt(txt):
     """
     Read text file with section names and links
@@ -632,27 +650,38 @@ def read_txt(txt):
     with open(txt) as o:
 
         articles_in_current_section = {}
+        intro_text = ""
 
         for raw_line in o.readlines():
             line = raw_line.strip()
             if not line:
                 continue
 
-            if "stanforddaily" not in line:
-                # assume title of new section (we post podcasts to Spotify)
+            if line.startswith("INTRO:"):
+                intro_text = line.split(":", 1)[1].strip()
+                continue
+
+            if any(line.lower().startswith(section) for section in ALL_SECTIONS):
                 if articles_in_current_section:
                     articles_by_section.append(articles_in_current_section)
+
+                section_name, section_slug = line.split(":", 1)
                 articles_in_current_section = {
-                    "name": line,
+                    "name": section_name,
+                    "slug": section_slug,
+                    "photo": "",
                     "links": [],
                 }
 
             else:
-                articles_in_current_section["links"].append(line)
+                if line.startswith("Photo:"):
+                    articles_in_current_section["photo"] = line.split(":", 1)[1].strip()
+                else:
+                    articles_in_current_section["links"].append(line)
 
         articles_by_section.append(articles_in_current_section)
 
-    return articles_by_section
+    return intro_text, articles_by_section
 
 def get_get_wp_excerpt():
 
@@ -674,32 +703,30 @@ def get_get_wp_excerpt():
 
 get_wp_excerpt = get_get_wp_excerpt()
 
+def get_wp_excerpt_from_author_name(headline, author_names):
+    
+    # If searching " " doesn't work, try searching under author name
+    author_name = author_names[0]
+    search_link = "https://stanforddaily.com/?s=" + "+".join(author_name.split(" "))
+    soup = BeautifulSoup(requests.get(search_link).content, "html.parser")
+    articles = soup.find_all("article")
+
+    for article in articles:
+        # Headline within headline attribute of second <h1> in <article>
+        try:
+            if headline == article.find_all("a")[1].get("title"):
+                return article.find_all("div", {"class" : "css-901oao"})[1].get_text()
+        except:
+            return None
+
 # functions render digest HTML
     
-def render_link(link, featured=False, is_cartoon=False):
+def render_link(link, featured=False, is_cartoon=False, is_podcast=False):
     print(f"Processing {link}...")
     soup = BeautifulSoup(requests.get(link).content, "html.parser")
 
     # headline in second <h1>
-    headline_text = soup.find_all("h1")[1].get_text()
-
-    def render_image():
-        if not featured and not is_cartoon:
-            return ""
-
-        image_link = soup.find("figure", id="featured-image").find("img").get_attribute_list("src")[0]
-
-        return f"""
-        <tr>
-        <td align="center" valign="top">
-        <a href="{link}" target="_blank" style="text-decoration:none;">
-        <img mc:edit="image6" class="em_full_img" src="{image_link}" width="540" height="300" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px;"></a>
-        </td>
-        </tr>
-                                                                                                      <tr>
-        <td height="25" class="em_height">&nbsp;</td>
-        </tr>
-        """
+    headline_text = soup.find_all("h1")[1].get_text() if not is_podcast else "PODCASTS"
 
     def render_headline():
         if is_cartoon:
@@ -723,7 +750,7 @@ def render_link(link, featured=False, is_cartoon=False):
         """
 
     def render_subtitle():
-        if not featured:
+        if not featured or is_podcast:
             return ""
 
         # subtitle in first <h2>
@@ -742,29 +769,48 @@ def render_link(link, featured=False, is_cartoon=False):
         """
 
     def get_author():
+        if is_podcast:
+            return "", ""
         # author's name in byline in <a ... rel='author'>
         authors = soup.find("main", id="main-article-content").find_all("a", rel="author")
         names = [a.get_text() for a in authors]
         
         # join names without Oxford comma
-        return ", ".join(names[:-2] + [" and ".join(names[-2:])])
+        joined_names = ", ".join(names[:-2] + [" and ".join(names[-2:])])
+        return names, joined_names
 
-    def get_excerpt():
+    author_names, joined_author_names = get_author()
 
-        # Try searching for actual excerpt in WordPress
-        wp_excerpt = get_wp_excerpt(headline_text)
-        if wp_excerpt:
-            print("Found WP excerpt ", wp_excerpt)
-            return wp_excerpt
+    def get_excerpt(omit_satire_blurb=True):
+        if is_podcast:
+            return "PODCASTS"
 
-        # Try first paragraph in article
-        try:
-            first_graf_excerpt = soup.find("div", id="main-article-text2").find("p").get_text()
-            print("Found first paragraph excerpt ", first_graf_excerpt)
-            return first_graf_excerpt
-        except:
-            print("Could not find excerpt")
-            return ""
+        def get_excerpt_text():
+
+            # Try searching for actual excerpt in WordPress
+            wp_excerpt = get_wp_excerpt(headline_text)
+            if wp_excerpt:
+                return wp_excerpt
+
+            # Try searching under author name
+            wp_excerpt = get_wp_excerpt_from_author_name(headline_text, author_names)
+            if wp_excerpt:
+                return wp_excerpt
+
+            # Try first paragraph in article
+            try:
+                first_graf_excerpt = soup.find("div", id="main-article-text2").find("p").get_text()
+                print("Found first paragraph excerpt ", first_graf_excerpt)
+                return first_graf_excerpt
+            except:
+                print("Could not find excerpt")
+                return ""
+
+        raw_excerpt = get_excerpt_text()
+        satire_prefix = "SATIRE: "
+        if omit_satire_blurb and raw_excerpt.startswith(satire_prefix):
+            return raw_excerpt[len(satire_prefix):]
+        return raw_excerpt
 
     if is_cartoon:
         cartoon_link = soup.find("figure", id="featured-image").find("img").get_attribute_list("src")[0]
@@ -779,7 +825,7 @@ def render_link(link, featured=False, is_cartoon=False):
 
         <tr>
           <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-            <span style="font-weight:bold; color:#5b5b5b;">By {get_author()}   ●  </span><a href="{link}"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> READ MORE »</span></a>
+            <span style="font-weight:bold; color:#5b5b5b;">By {joined_author_names}   ●  </span><a href="{link}"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> READ MORE »</span></a>
           </td>
         </tr>
 
@@ -788,8 +834,9 @@ def render_link(link, featured=False, is_cartoon=False):
         </tr>
         """
 
+    action = "READ MORE" if not is_podcast else "LISTEN NOW" 
+
     return f"""
-    {render_image()}
     {render_headline()}
     {render_subtitle()}
 
@@ -801,7 +848,7 @@ def render_link(link, featured=False, is_cartoon=False):
 
     <tr>
       <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:14px;line-height:14px;color:#5b5b5b;font-weight:900;padding-bottom:12px;">
-        <span style="font-weight:bold; color:#5b5b5b;">By {get_author()}   ●  </span><a href="{link}"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> READ MORE »</span></a>
+        <span style="font-weight:bold; color:#5b5b5b;">By {joined_author_names}   ●  </span><a href="{link}"><span style="font-family:'Open Sans', Arial, sans-serif;font-size:12px;line-height:15px;color:#8c1514;font-weight:bold;margin-bottom:5px;"> {action} »</span></a>
       </td>
     </tr>
 
@@ -812,44 +859,64 @@ def render_link(link, featured=False, is_cartoon=False):
 
 def render_section(section):
 
-    is_cartoon = section["name"].lower() == "cartoon of the day"
+    is_cartoon = section["name"].lower().startswith("cartoon")
+    is_podcast = section["name"].lower().startswith("podcast")
+    if is_podcast:
+        print("!PODCAST --> REMEMBER TO FILL DETAILS IN MANUALLY")
 
     def get_section_header():
         section_name = section["name"]
+        slug = section["slug"]
 
-        category_pages = {
-            "news": "https://stanforddaily.com/category/news/",
-            "opinions": "https://stanforddaily.com/category/opinions/",
-            "sports": "https://stanforddaily.com/category/sports/",
-            "arts & life": "https://stanforddaily.com/category/arts-life/",
-            "the grind": "https://stanforddaily.com/category/thegrind/",
-            "satire": "https://stanforddaily.com/category/satire/",
-            "data": "https://stanforddaily.com/category/@94305/",
-            "podcasts": "https://stanforddaily.com/category/podcasts/",
-            "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
-            "cartoon of the day": "https://stanforddaily.com/category/cartoons/",
-        }
+        header_text = slug
+        if section_name.lower() in ["opinions", "satire"] or is_cartoon or is_podcast:
+            header_text = f"{section_name.title()}: {slug}" if slug else section_name.title()
 
         category_page_link = "http://stanforddaily.com"
-        if section_name.lower() not in category_pages:
+        if section_name.lower() not in CATEGORY_PAGES:
             print(f"WARNING: Could not find category page link for section {section_name}, using homepage")
         else:
-            category_page_link = category_pages[section_name.lower()]
+            category_page_link = CATEGORY_PAGES[section_name.lower()]
 
-        return f"""
+        hr = """
         <tr>
           <td align="center" valign="top" style="font-size:0px;line-height:0px;height:3px;">
             <hr>
           </td>
         </tr>
-                                                                  
-        <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#8c1514;font-weight:900;padding-bottom:5px;">
-          <a href="{category_page_link}">{section_name}</a>
-        </td>
         """
 
-    def get_articles(is_cartoon):
-        return "\n".join(render_link(link, is_cartoon=is_cartoon) for link in section["links"])
+        return f"""
+        {hr if is_cartoon else ""}
+                                                                  
+        <td align="left" valign="top" class="em_defaultlink" mc:edit="new1" style="font-family:'Open Sans', Arial, sans-serif;font-size:17px;line-height:21px;color:#8c1514;font-weight:900;padding-bottom:5px;">
+          <a href="{category_page_link}">{header_text}</a>
+        </td>
+        <!--<tr>
+          <td align="left" valign="top" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+          <a href="" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">{header_text}</a>
+          </td>
+        </tr>-->
+        """
+
+    def render_image():
+        image_link = section["photo"]
+        image_links_to = section["links"][0]
+
+        return f"""
+        <tr>
+        <td align="center" valign="top">
+        <a href="{image_links_to}" target="_blank" style="text-decoration:none;">
+        <img mc:edit="image6" class="em_full_img" src="{image_link}" width="540" height="300" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; margin-top: 15px;"></a>
+        </td>
+        </tr>
+                                                                                                      <tr>
+        <td height="25" class="em_height">&nbsp;</td>
+        </tr>
+        """
+
+    def get_articles():
+        return "\n".join(render_link(link, is_cartoon=is_cartoon, is_podcast=is_podcast) for link in section["links"])
 
     def get_ad_spot():
         return f"""
@@ -865,32 +932,42 @@ def render_section(section):
         """
 
     return f"""
+    {render_image()}
     {get_section_header()}
 
     <tr>
       <td height="10" class="em_height">&nbsp;</td>
     </tr>
 
-    {get_articles(is_cartoon)}
+    {get_articles()}
     {get_ad_spot()}
     """
 
 def render_featured():
     return ""
+
+def render_intro(intro_text):
+    return f"""
+    <tr>
+        <td valign="top" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 16px;line-height: 24px;color: black;font-weight: 500;padding-bottom: 5px;padding-top:15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+        {intro_text}
+        </td>
+    </tr>
+    """
         
-def render_digest(sections):
+def render_digest(intro_text, sections):
 
     def get_featured():
         assert sections[0]["name"].lower() == "featured", "first section must be featured"
         return render_link(sections[0] ["links"][0], featured=True)
 
     def get_sections():
-        return "\n".join(render_section(section) for section in sections[1:])
+        return "\n".join(render_section(section) for section in sections)
 
     return f"""
     {DIGEST_HEADER}
 
-    {get_featured()}
+    {render_intro(intro_text)}
     {get_sections()}
 
     {DIGEST_FOOTER}
@@ -902,6 +979,6 @@ def write_digest(digest):
         o.write(BeautifulSoup(digest, "html.parser").prettify())
 
 
-txt_data = read_txt(DIGEST_IN)
-digest = render_digest(txt_data)
+intro_text, section_data = read_txt(DIGEST_IN)
+digest = render_digest(intro_text, section_data)
 write_digest(digest)
