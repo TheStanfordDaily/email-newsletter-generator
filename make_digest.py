@@ -473,10 +473,10 @@ DIGEST_FOOTER = """
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 10px;line-height: 15px;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="https://www.stanforddaily.com/join-the-daily/" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Click Here to Join Our Staff</a></span>
+<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="https://www.stanforddaily.com/join" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Click Here to Join Our Staff</a></span>
 <br>
 <br>
-<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="https://www.stanforddaily.com/about/" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Contact Us</a></span>
+<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="https://www.stanforddaily.com/about" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Contact Us</a></span>
 <br>
 <br>
 456 Panama Mall, Stanford CA, 94305
@@ -488,7 +488,7 @@ DIGEST_FOOTER = """
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #ff1061;padding-bottom: 20px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-<a href="https://www.stanforddaily.com/" target="_blank" style="text-decoration: none;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">www.stanforddaily.com</a>
+<a href="https://www.stanforddaily.com" target="_blank" style="text-decoration: none;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">www.stanforddaily.com</a>
 </td>
 </tr>
 </tbody></table>
