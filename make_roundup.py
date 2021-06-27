@@ -632,7 +632,7 @@ CATEGORY_PAGES = {
     "sports": "https://stanforddaily.com/category/sports/",
     "arts & life": "https://stanforddaily.com/category/arts-life/",
     "the grind": "https://stanforddaily.com/category/thegrind/",
-    "satire": "https://stanforddaily.com/category/satire/",
+    "humor": "https://stanforddaily.com/category/humor/",
     "data": "https://stanforddaily.com/category/@94305/",
     "podcasts": "https://stanforddaily.com/category/podcasts/",
     "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
@@ -781,7 +781,7 @@ def render_link(link, featured=False, is_cartoon=False, is_podcast=False):
 
     author_names, joined_author_names = get_author()
 
-    def get_excerpt(omit_satire_blurb=True):
+    def get_excerpt(omit_humor_blurb=True):
         if is_podcast:
             return "PODCASTS"
 
@@ -807,9 +807,9 @@ def render_link(link, featured=False, is_cartoon=False, is_podcast=False):
                 return ""
 
         raw_excerpt = get_excerpt_text()
-        satire_prefix = "SATIRE: "
-        if omit_satire_blurb and raw_excerpt.startswith(satire_prefix):
-            return raw_excerpt[len(satire_prefix):]
+        humor_prefix = "humor: "
+        if omit_humor_blurb and raw_excerpt.startswith(humor_prefix):
+            return raw_excerpt[len(humor_prefix):]
         return raw_excerpt
 
     if is_cartoon:
@@ -869,7 +869,7 @@ def render_section(section):
         slug = section["slug"]
 
         header_text = slug
-        if section_name.lower() in ["opinions", "satire"] or is_cartoon or is_podcast:
+        if section_name.lower() in ["opinions", "humor"] or is_cartoon or is_podcast:
             header_text = f"{section_name.title()}: {slug}" if slug else section_name.title()
 
         category_page_link = "http://stanforddaily.com"

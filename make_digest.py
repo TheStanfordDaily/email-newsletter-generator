@@ -823,7 +823,7 @@ def render_section(section):
             "sports": "https://stanforddaily.com/category/sports/",
             "arts & life": "https://stanforddaily.com/category/arts-life/",
             "the grind": "https://stanforddaily.com/category/thegrind/",
-            "satire": "https://stanforddaily.com/category/satire/",
+            "humor": "https://stanforddaily.com/category/humor/",
             "data": "https://stanforddaily.com/category/@94305/",
             "podcasts": "https://stanforddaily.com/category/podcasts/",
             "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
