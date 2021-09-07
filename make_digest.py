@@ -13,11 +13,11 @@ TODAY = date.today()
 UTM_CAMPAIGN = "utm_campaign=" + "digest"
 UTM_MEDIUM = "&utm_medium=" + "email"
 UTM_SOURCE = "&utm_source=" + "mailchimp"
-UTM_CONTENT = "&utm_content=" + today.strftime("%b-%d-%Y")
-URL_PARAMS = "?" + UTM_CAMPAIGN + UTM_MEDIUM + UTM_SOURCE + UTM_CONTENT
+UTM_CONTENT = "&utm_content=" + TODAY.strftime("%b-%d-%Y")
+URL_PARAMS = f"?{UTM_CAMPAIGN}{UTM_MEDIUM}{UTM_SOURCE}{UTM_CONTENT}"
 
 # Header HTML in each digest
-DIGEST_HEADER = """
+DIGEST_HEADER = f"""
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -372,7 +372,7 @@ DIGEST_HEADER = """
                             <table width="275" border="0" cellspacing="0" cellpadding="0" align="right" class="em_wrapper">
                               <tbody><tr>
                                 <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
-                                  <a href="{format_link(https://www.stanforddaily.com/)}">stanforddaily.com | *|DATE:F j, Y|*</a>
+                                  <a href="{format_link("https://www.stanforddaily.com/")}">stanforddaily.com | *|DATE:F j, Y|*</a>
                                 </td>
                               </tr>
                               <tr>
@@ -414,7 +414,7 @@ DIGEST_HEADER = """
                  </tr>
 		<tr>
                     <td align="center" valign="top">
-                      <a href="{format_link(https://www.stanforddaily.com/high-school-programs)}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2020/08/Stanford-Daily-S-copy.png" width="1050" height="170" alt="Reads apply to our high school summer programs!" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
+                      <a href="{format_link("https://www.stanforddaily.com/high-school-programs/")}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2020/08/Stanford-Daily-S-copy.png" width="1050" height="170" alt="Reads apply to our high school summer programs!" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
                     </td>
                   </tr>
 		-->
@@ -424,12 +424,12 @@ DIGEST_HEADER = """
                   </tr>
                   <tr>
                     <td align="center" valign="top">
-                      <a href="{format_link(https://www.stanforddaily.com/)}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/cropped-DailyLogo-CardinalRed.png" width="600" height="180" alt="The Stanford Daily logo" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
+                      <a href="{format_link("https://www.stanforddaily.com/")}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/cropped-DailyLogo-CardinalRed.png" width="600" height="180" alt="The Stanford Daily logo" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
                     </td>
                   </tr>
 		  <tr>
                     <td>
-                      <div class="top_prompts" style="display: flex;margin-top: 10px;"><a class="top_prompts" href="{format_link(https://www.stanforddaily.com/tips/)}" style="margin-left:auto;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">SUBMIT A TIP</a><a class="top_prompts" href="{format_link(https://www.stanforddaily.com/donate/)}" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">DONATE</a><a class="top_prompts" href="{format_link(https://www.stanforddaily.com/submitting-to-the-daily/)}" style="margin-right:auto;border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT WORK</a></div>
+                      <div class="top_prompts" style="display: flex;margin-top: 10px;"><a class="top_prompts" href="{format_link("https://www.stanforddaily.com/tips/")}" style="margin-left:auto;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">SUBMIT A TIP</a><a class="top_prompts" href="{format_link("https://www.stanforddaily.com/donate/")}" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">DONATE</a><a class="top_prompts" href="{format_link("https://www.stanforddaily.com/submitting-to-the-daily/")}" style="margin-right:auto;border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT WORK</a></div>
                     </td>
                   </tr>
                   <tr>
@@ -439,7 +439,7 @@ DIGEST_HEADER = """
 """
 
 # Footer HTML used in each digest
-DIGEST_FOOTER = """
+DIGEST_FOOTER = f"""
 </tbody></table>
 </td>
 </tr>
@@ -460,7 +460,7 @@ DIGEST_FOOTER = """
 <!--//Footer-->
 <tr>
 <td align="center" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-<a href="{format_link(https://www.stanforddaily.com/tips/)}" class="em_defaultlink" style="text-decoration: none;font-family: 'Open Sans', Arial, sans-serif;font-size: 18px;line-height: 24px;color: #ffffff;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">Are we missing something? Click here to send us a tip.</a>
+<a href="{format_link("https://www.stanforddaily.com/tips/")}" class="em_defaultlink" style="text-decoration: none;font-family: 'Open Sans', Arial, sans-serif;font-size: 18px;line-height: 24px;color: #ffffff;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">Are we missing something? Click here to send us a tip.</a>
 </td>
 </tr>
 <tr>
@@ -482,10 +482,10 @@ DIGEST_FOOTER = """
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 10px;line-height: 15px;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="{format_link(https://www.stanforddaily.com/join)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Click Here to Join Our Staff</a></span>
+<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="{format_link("https://www.stanforddaily.com/join")}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Click Here to Join Our Staff</a></span>
 <br>
 <br>
-<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="{format_link(https://www.stanforddaily.com/about)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Contact Us</a></span>
+<span style="font-weight: bold;color: #ffffff;border-collapse: collapse;mso-line-height-rule: exactly;"><a href="{format_link("https://www.stanforddaily.com/about")}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: #ffffff;text-decoration: none;">Contact Us</a></span>
 <br>
 <br>
 456 Panama Mall, Stanford CA, 94305
@@ -497,7 +497,7 @@ DIGEST_FOOTER = """
 </tr>
 <tr>
 <td align="left" valign="top" class="em_white em_center" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #ff1061;padding-bottom: 20px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-<a href="{format_link(https://www.stanforddaily.com)}" target="_blank" style="text-decoration: none;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">www.stanforddaily.com</a>
+<a href="{format_link("https://www.stanforddaily.com")}" target="_blank" style="text-decoration: none;color: #ffffff;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">www.stanforddaily.com</a>
 </td>
 </tr>
 </tbody></table>
@@ -685,7 +685,7 @@ get_wp_excerpt = get_get_wp_excerpt()
 
 # add referral data to links
 def format_link(link):
-	return f"{link}" + URL_PARAMS
+	return f"{link}{URL_PARAMS}"
 
 
 # functions render digest HTML
@@ -785,7 +785,7 @@ def render_link(link, featured=False, is_cartoon=False):
         return f"""
         <tr>
           <td align="center" valign="top">
-            <a href="https://www.stanforddaily.com/category/cartoons/" target="_blank" style="text-decoration:none;">
+            <a href="{format_link("https://www.stanforddaily.com/category/cartoons/")}" target="_blank" style="text-decoration:none;">
               <img mc:edit="image6" class="em_full_img" src="{cartoon_link}" width="400" height="400" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:6648px; padding-bottom: 12px;">
             </a>
           </td>
