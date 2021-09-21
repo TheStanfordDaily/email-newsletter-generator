@@ -16,8 +16,12 @@ UTM_SOURCE = "&utm_source=" + "mailchimp"
 UTM_CONTENT = "&utm_content=" + TODAY.strftime("%b-%d-%Y")
 URL_PARAMS = f"?{UTM_CAMPAIGN}{UTM_MEDIUM}{UTM_SOURCE}{UTM_CONTENT}"
 
+# add referral data to links
+def format_link(link):
+	return f"{link}{URL_PARAMS}"
+
 # Header HTML in each digest
-DIGEST_HEADER = f"""
+DIGEST_HEADER = """
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 
@@ -337,7 +341,7 @@ DIGEST_HEADER = f"""
          .top_prompts a {
              font-size: 0.75em;
          }
-      }
+      }""" + f"""
     </style>
       <body style="height: 100%;margin: 0 !important;padding: 0 !important;width: 100%;-ms-text-size-adjust: 100% !important;-webkit-text-size-adjust: 100% !important;background-color: #FAFAFA;-webkit-font-smoothing: antialiased !important;">
         <center>
@@ -682,11 +686,6 @@ def get_get_wp_excerpt():
     return get_wp_excerpt
 
 get_wp_excerpt = get_get_wp_excerpt()
-
-# add referral data to links
-def format_link(link):
-	return f"{link}{URL_PARAMS}"
-
 
 # functions render digest HTML
     
