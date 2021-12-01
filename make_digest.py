@@ -439,6 +439,15 @@ DIGEST_HEADER = """
                   <tr>
                     <td height="30" style="font-size:1px;line-height:1px;">&nbsp;</td>
                   </tr>
+        <!-- AD
+        <tr>
+          <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
+            <a href=WEBLINK style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
+              <img alt="" border="0" class="em_full_img" height="180" src=IMAGELINK style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;max-height: 59.5px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
+            </a>
+          </td>
+        </tr>
+        -->
 
 """
 
