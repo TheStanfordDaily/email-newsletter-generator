@@ -412,13 +412,13 @@ DIGEST_HEADER = """
             <tbody><tr>
               <td align="center" valign="top" style="padding:0 50px;" class="em_aside">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-		<!--
+		<!-- AD
                   <tr>
                     <td height="30" class="em_height"> </td>
                  </tr>
 		<tr>
                     <td align="center" valign="top">
-                      <a href="{format_link("https://www.stanforddaily.com/high-school-programs/")}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2020/08/Stanford-Daily-S-copy.png" width="1050" height="170" alt="Reads apply to our high school summer programs!" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
+                      <a href="WEBLINK" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="IMAGELINK" width="1050" height="170" alt="IMAGEALT" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
                     </td>
                   </tr>
 		-->
