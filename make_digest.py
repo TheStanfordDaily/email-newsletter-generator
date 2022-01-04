@@ -20,6 +20,10 @@ URL_PARAMS = f"?{UTM_CAMPAIGN}{UTM_MEDIUM}{UTM_SOURCE}{UTM_CONTENT}"
 def format_link(link):
 	return f"{link}{URL_PARAMS}"
 
+# User-agent data for request (necessary to not be blocked by our web host)
+# This was set as a custom allowed rule by WP Engine support just for us
+USER_AGENT = {'User-agent': '9Ds8MnNbYcg5t376c8m6'}
+
 # Header HTML in each digest
 DIGEST_HEADER = """
 <!doctype html>
@@ -676,40 +680,35 @@ def read_txt(txt):
 
     return articles_by_section
 
-def get_get_wp_excerpt():
+def get_wp_excerpt(headline_text):
 
     # Searching " " turns up most (but potentially not all) recent articles with excerpts
-    excerpts_link = "https://stanforddaily.com/?s=+"
-    soup = BeautifulSoup(requests.get(excerpts_link).content, "html.parser")
-    articles = soup.find_all("article")
+    excerpts_link = "https://stanforddaily.com/?s=+" + headline_text.replace(" ", "+")
+    soup = BeautifulSoup(requests.get(excerpts_link, headers = USER_AGENT).content, "html.parser")
+    articles = soup.find_all(class_="article-listing")
 
-    def get_wp_excerpt(headline):
-        for article in articles:
-            # Headline within headline attribute of second <h1> in <article>
-            try:
-                if headline == article.find_all("a")[1].get("title"):
-                    return article.find_all("div", {"class" : "css-901oao"})[1].get_text()
-            except:
-                return None
-
-    return get_wp_excerpt
-
-get_wp_excerpt = get_get_wp_excerpt()
+    for article in articles:
+        # Headline within headline attribute of second <h1> in <article>
+        try:
+            if headline_text == article.find(class_="archive-headline").find("a").get_text():
+              return article.find("div", {"id" : "post-excerpt"}).get_text()
+        except:
+            return None
 
 # functions render digest HTML
     
 def render_link(link, featured=False, is_cartoon=False):
     print(f"Processing {link}...")
-    soup = BeautifulSoup(requests.get(link).content, "html.parser")
+    soup = BeautifulSoup(requests.get(link, headers = USER_AGENT).content, "html.parser")
 
     # headline in second <h1>
-    headline_text = soup.find_all("h1")[1].get_text()
+    headline_text = soup.find_all("h1")[0].get_text(strip=True)
 
     def render_image():
         if not featured and not is_cartoon:
             return ""
 
-        image_link = soup.find("figure", id="featured-image").find("img").get_attribute_list("src")[0]
+        image_link = soup.find(id="featured-image").find('a').get_attribute_list("href")[0]
 
         return f"""
         <tr>
@@ -765,7 +764,7 @@ def render_link(link, featured=False, is_cartoon=False):
 
     def get_author():
         # author's name in byline in <a ... rel='author'>
-        authors = soup.find("main", id="main-article-content").find_all("a", rel="author")
+        authors = soup.find_all("a", class_="coauthor-name")
         names = [a.get_text() for a in authors]
         
         # join names without Oxford comma
@@ -781,15 +780,15 @@ def render_link(link, featured=False, is_cartoon=False):
 
         # Try first paragraph in article
         try:
-            first_graf_excerpt = soup.find("div", id="main-article-text2").find("p").get_text()
-            print("Found first paragraph excerpt ", first_graf_excerpt)
+            first_graf_excerpt = soup.find(id="single-content").find("p").get_text()
+            print("Found first paragraph excerpt: ", first_graf_excerpt)
             return first_graf_excerpt
         except:
             print("Could not find excerpt")
-            return ""
+            return "Could not find excerpt"
 
     if is_cartoon:
-        cartoon_link = soup.find("figure", id="featured-image").find("img").get_attribute_list("src")[0]
+        cartoon_link = soup.find(id="featured-image").find('a').get_attribute_list("href")[0]
         return f"""
         <tr>
           <td align="center" valign="top">
