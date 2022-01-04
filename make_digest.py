@@ -682,7 +682,7 @@ def read_txt(txt):
 
 def get_wp_excerpt(headline_text):
 
-    # Searching " " turns up most (but potentially not all) recent articles with excerpts
+    # We search for the headline, take all the post listings from the page, and if one matches the headline, we take the excerpt
     excerpts_link = "https://stanforddaily.com/?s=+" + headline_text.replace(" ", "+")
     soup = BeautifulSoup(requests.get(excerpts_link, headers = USER_AGENT).content, "html.parser")
     articles = soup.find_all(class_="article-listing")
