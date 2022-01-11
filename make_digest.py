@@ -418,7 +418,7 @@ DIGEST_HEADER = """
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<!-- AD
                   <tr>
-                    <td height="30" class="em_height"> </td>
+                    <td height="30" class="em_height"> </td>
                  </tr>
 		<tr>
                     <td align="center" valign="top">
