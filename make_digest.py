@@ -849,6 +849,7 @@ def render_section(section):
             "podcasts": "https://stanforddaily.com/category/podcasts/",
             "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
             "cartoon of the day": "https://stanforddaily.com/category/cartoons/",
+            "multimedia": "https://stanforddaily.com/category/multimedia/",
         }
 
         category_page_link = "http://stanforddaily.com"
