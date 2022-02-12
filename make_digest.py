@@ -350,10 +350,6 @@ DIGEST_HEADER = """
       <body style="height: 100%;margin: 0 !important;padding: 0 !important;width: 100%;-ms-text-size-adjust: 100% !important;-webkit-text-size-adjust: 100% !important;background-color: #FAFAFA;-webkit-font-smoothing: antialiased !important;">
         <center>
 
-    <!--*|IF:MC_PREVIEW_TEXT|*-->
-    <!--[if !gte mso 9]><!--><span class="mcnPreviewText" style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
-    <!--<![endif]-->
-    <!--*|END:IF|*-->
     <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" bgcolor="#ffffff">
       <tbody><tr>
         <td align="center" valign="top">
