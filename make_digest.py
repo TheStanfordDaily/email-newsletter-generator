@@ -75,6 +75,7 @@ class Divider:
 
 
 class Article:
+    # Considering a constructor that takes in data parameter.
     def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False):
         self.url = url
         self.headline = headline
@@ -89,6 +90,18 @@ class Article:
 
     def byline(self):
         return itemize(self.authors)
+
+    @classmethod
+    def from_json(cls, data, featured=False):
+        return cls(
+            formatted_url(data["link"]),
+            data["title"]["rendered"],
+            data["jetpack_featured_media_url"],
+            data["wps_subtitle"],
+            data["parsely"]["meta"]["creator"],
+            data["excerpt"]["rendered"],
+            featured=featured
+        )
 
     def render(self):
         if self.featured:
@@ -155,12 +168,12 @@ class Section:
     def __init__(self, urls, name=None, featured=False):
         self.name = name
         slugs = [x.split('/')[6] for x in urls]
-        rsp = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
-        rsp_data = rsp.json()
+        response = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
+        data = response.json()
         self.articles = [Article(formatted_url(item["link"]), item["title"]["rendered"],
                                  item["jetpack_featured_media_url"], item["wps_subtitle"],
                                  item["parsely"]["meta"]["creator"], item["excerpt"]["rendered"],
-                                 featured=featured) for item in rsp_data]
+                                 featured=featured) for item in data]
 
     def render(self):
         if self.name is None or "CARTOON" in self.name:
@@ -194,12 +207,8 @@ def sections_from_file(directory):
     for i in range(0, len(indices) - 1):
         section_name = lines[indices[i]]
         group = lines[indices[i]:indices[i + 1]]
-
         sections_in.append(Section(group[1:], name=section_name, featured=section_name.lower() == "featured"))
-        # sections_in.append(Section(group[1:], section_name))
-        # sections_in.append(Section([Article(x, featured=featured_article) for x in group[1:]], name=section_name))
 
-    # TODO: - Remove headline if cartoon like before.
     return sections_in
 
 
