@@ -181,7 +181,7 @@ class Section:
                      </tr>
                     """
 
-        return title + str(Spacer(10)) + str(Spacer(25)).join(x.render() for x in self.articles)
+        return title + Spacer.small() + Spacer.large().join(x.render() for x in self.articles)
 
 
 def write_digest(digest):
