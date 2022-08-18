@@ -12,11 +12,6 @@ DIGEST_OUT = "digest-out.txt"
 # This was set as a custom allowed rule by WP Engine support just for us
 USER_AGENT = {"User-agent": "9Ds8MnNbYcg5t376c8m6"}
 ENDPOINT = "https://stanforddaily.com/wp-json/wp/v2/posts"
-SLUG_MAP = {
-    "THE GRIND": "thegrind",
-    "DATA": "94305",
-    "ARTS & LIFE": "arts-life"
-}
 CATEGORY_PAGES = {
     "FEATURED": "",
     "NEWS": "https://stanforddaily.com/category/news/",
