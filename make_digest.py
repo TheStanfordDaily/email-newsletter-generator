@@ -75,7 +75,6 @@ class Divider:
 
 
 class Article:
-    # Considering a constructor that takes in data parameter.
     def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False):
         self.url = url
         self.headline = headline
@@ -84,9 +83,6 @@ class Article:
         self.authors = authors
         self.excerpt = excerpt
         self.featured = featured
-
-    def slug(self):
-        return self.url.split('/')[6]
 
     def byline(self):
         return itemize(self.authors)
@@ -170,10 +166,7 @@ class Section:
         slugs = [x.split('/')[6] for x in urls]
         response = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
         data = response.json()
-        self.articles = [Article(formatted_url(item["link"]), item["title"]["rendered"],
-                                 item["jetpack_featured_media_url"], item["wps_subtitle"],
-                                 item["parsely"]["meta"]["creator"], item["excerpt"]["rendered"],
-                                 featured=featured) for item in data]
+        self.articles = [Article.from_json(item, featured=featured) for item in data]
 
     def render(self):
         if self.name is None or "CARTOON" in self.name:
