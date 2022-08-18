@@ -120,7 +120,7 @@ class Article:
                         </td>
                     </tr>
                     """
-            feature_image += str(Spacer(25))
+            feature_image += Spacer.large()
         else:
             headline = f"""
                 <tr>
