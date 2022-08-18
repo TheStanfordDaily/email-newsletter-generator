@@ -18,19 +18,19 @@ SLUG_MAP = {
     "ARTS & LIFE": "arts-life"
 }
 CATEGORY_PAGES = {
-    "featured": "",
-    "news": "https://stanforddaily.com/category/news/",
-    "opinions": "https://stanforddaily.com/category/opinions/",
-    "sports": "https://stanforddaily.com/category/sports/",
-    "arts & life": "https://stanforddaily.com/category/arts-life/",
-    "the grind": "https://stanforddaily.com/category/thegrind/",
-    "humor": "https://stanforddaily.com/category/humor/",
-    "data": "https://stanforddaily.com/category/@94305/",
-    "podcasts": "https://stanforddaily.com/category/podcasts/",
-    "video": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
-    "cartoon of the week": "https://stanforddaily.com/category/cartoons/",
-    "cartoon of the day": "https://stanforddaily.com/category/cartoons/",
-    "cartoons": "https://stanforddaily.com/category/cartoons/"
+    "FEATURED": "",
+    "NEWS": "https://stanforddaily.com/category/news/",
+    "OPINIONS": "https://stanforddaily.com/category/opinions/",
+    "SPORTS": "https://stanforddaily.com/category/sports/",
+    "ARTS & LIFE": "https://stanforddaily.com/category/arts-life/",
+    "THE GRIND": "https://stanforddaily.com/category/thegrind/",
+    "HUMOR": "https://stanforddaily.com/category/humor/",
+    "DATA": "https://stanforddaily.com/category/@94305/",
+    "PODCASTS": "https://stanforddaily.com/category/podcasts/",
+    "VIDEO": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
+    "CARTOON OF THE WEEK": "https://stanforddaily.com/category/cartoons/",
+    "CARTOON OF THE DAY": "https://stanforddaily.com/category/cartoons/",
+    "CARTOONS": "https://stanforddaily.com/category/cartoons/"
 }
 ALL_SECTIONS = list(CATEGORY_PAGES.keys())
 
@@ -70,7 +70,7 @@ class Divider:
         """
 
     @classmethod
-    def standard(cls):
+    def default(cls):
         return str(cls(3))
 
 
@@ -157,16 +157,18 @@ class Section:
         slugs = [x.split('/')[6] for x in urls]
         rsp = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
         rsp_data = rsp.json()
-        self.articles = [Article("url", item["title"]["rendered"], item["jetpack_featured_media_url"], item["wps_subtitle"],
-                            item["parsely"]["meta"]["creator"], item["excerpt"]["rendered"], featured=featured) for item in rsp_data]
+        self.articles = [Article(formatted_url(item["link"]), item["title"]["rendered"],
+                                 item["jetpack_featured_media_url"], item["wps_subtitle"],
+                                 item["parsely"]["meta"]["creator"], item["excerpt"]["rendered"],
+                                 featured=featured) for item in rsp_data]
 
     def render(self):
-        if self.name is None:
+        if self.name is None or "CARTOON" in self.name:
             title = ""
         else:
             title = f"""
                     <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                      <a href="{formatted_url('https://stanforddaily.com/category/')}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                      <a href="{formatted_url(CATEGORY_PAGES[self.name])}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
                        {self.name.upper()}
                       </a>
                      </td>
@@ -174,22 +176,6 @@ class Section:
                     """
 
         return title + str(Spacer(10)) + str(Spacer(25)).join(x.render() for x in self.articles)
-
-
-class ExperimentalArticle:
-    def __init__(self, url, headline, image_url, subtitle, authors, excerpt):
-        self.url = url
-        self.headline = headline
-        self.image_url = image_url
-        self.subtitle = subtitle
-        self.authors = authors
-        self.excerpt = excerpt
-
-    def byline(self):
-        return itemize(self.authors)
-
-    # add article from url method in original article class or something
-    # and render function from above
 
 
 def write_digest(digest):
@@ -203,7 +189,7 @@ def write_digest(digest):
 def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
-    indices = [i for i, x in enumerate(lines) if x.lower() in ALL_SECTIONS]
+    indices = [i for i, x in enumerate(lines) if x in ALL_SECTIONS]
     sections_in = []
     for i in range(0, len(indices) - 1):
         section_name = lines[indices[i]]
@@ -219,5 +205,6 @@ def sections_from_file(directory):
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (str(Spacer(25)) + str(Divider(3))).join(x.render() for x in sections) + str(Spacer(25)) + DIGEST_FOOTER
+    digest_out = DIGEST_HEADER + (Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
