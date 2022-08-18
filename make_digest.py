@@ -75,43 +75,20 @@ class Divider:
 
 
 class Article:
-    def __init__(self, url, featured=False):
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False):
         self.url = url
+        self.headline = headline
+        self.image_url = image_url
+        self.subtitle = subtitle
+        self.authors = authors
+        self.excerpt = excerpt
         self.featured = featured
-        self.response = requests.get(ENDPOINT, headers=USER_AGENT, params={"slug": self.slug(), "excerpt": "true"})
-        self.data = self.response.json()
-        # self.headline = self.headline()
 
     def slug(self):
         return self.url.split('/')[6]
 
-    def headline(self):
-        try:
-            return self.data[0]["title"]["rendered"]
-        except KeyError:
-            return ""
-        except IndexError:
-            return ""
-
-    def image_url(self):
-        return self.data[0]["jetpack_featured_media_url"]
-
-    def subtitle(self):
-        return self.data[0]["wps_subtitle"]
-
-    def authors(self):
-        return self.data[0]["parsely"]["meta"]["creator"]
-
     def byline(self):
-        return itemize(self.authors())
-
-    def excerpt(self):
-        try:
-            return self.data[0]["excerpt"]["rendered"]
-        except KeyError:
-            return ""
-        except IndexError:
-            return ""
+        return itemize(self.authors)
 
     def render(self):
         if self.featured:
@@ -119,7 +96,7 @@ class Article:
                 <tr>
                     <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
                         <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                            {self.headline()}
+                            {self.headline}
                         </a>
                     </td>
                 </tr>
@@ -129,7 +106,7 @@ class Article:
                     <tr>
                         <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
                             <a href="{formatted_url(self.url)}" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
-                            <img border="0" class="em_full_img" height="300" src="{self.image_url()}" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="540">
+                            <img border="0" class="em_full_img" height="300" src="{self.image_url}" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="540">
                         </a>
                         </td>
                     </tr>
@@ -140,7 +117,7 @@ class Article:
                 <tr>
                     <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #000000;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
                         <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                        {self.headline()}
+                        {self.headline}
                         </a>
                     </td>
                 </tr>
@@ -151,7 +128,7 @@ class Article:
         excerpt = f"""
         <tr>
             <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                {self.excerpt()}
+                {self.excerpt}
             </td>
         </tr>
         """
@@ -175,14 +152,13 @@ class Article:
 
 
 class Section:
-    def __init__(self, articles, name=None):
+    def __init__(self, urls, name=None, featured=False):
         self.name = name
-        self.articles = articles
-        if name is not None:
-            if name.upper() in SLUG_MAP:
-                self.slug = SLUG_MAP[name.upper()]
-            else:
-                self.slug = name.lower()
+        slugs = [x.split('/')[6] for x in urls]
+        rsp = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
+        rsp_data = rsp.json()
+        self.articles = [Article("url", item["title"]["rendered"], item["jetpack_featured_media_url"], item["wps_subtitle"],
+                            item["parsely"]["meta"]["creator"], item["excerpt"]["rendered"], featured=featured) for item in rsp_data]
 
     def render(self):
         if self.name is None:
@@ -190,7 +166,7 @@ class Section:
         else:
             title = f"""
                     <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                      <a href="{formatted_url('https://stanforddaily.com/category/' + self.slug)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                      <a href="{formatted_url('https://stanforddaily.com/category/')}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
                        {self.name.upper()}
                       </a>
                      </td>
@@ -198,6 +174,22 @@ class Section:
                     """
 
         return title + str(Spacer(10)) + str(Spacer(25)).join(x.render() for x in self.articles)
+
+
+class ExperimentalArticle:
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt):
+        self.url = url
+        self.headline = headline
+        self.image_url = image_url
+        self.subtitle = subtitle
+        self.authors = authors
+        self.excerpt = excerpt
+
+    def byline(self):
+        return itemize(self.authors)
+
+    # add article from url method in original article class or something
+    # and render function from above
 
 
 def write_digest(digest):
@@ -216,12 +208,10 @@ def sections_from_file(directory):
     for i in range(0, len(indices) - 1):
         section_name = lines[indices[i]]
         group = lines[indices[i]:indices[i + 1]]
-        featured_article = False
-        if section_name.lower() == "featured":
-            section_name = None
-            featured_article = True
 
-        sections_in.append(Section([Article(x, featured=featured_article) for x in group[1:]], name=section_name))
+        sections_in.append(Section(group[1:], name=section_name, featured=section_name.lower() == "featured"))
+        # sections_in.append(Section(group[1:], section_name))
+        # sections_in.append(Section([Article(x, featured=featured_article) for x in group[1:]], name=section_name))
 
     # TODO: - Remove headline if cartoon like before.
     return sections_in
