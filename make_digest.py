@@ -6,7 +6,7 @@ from utilities import formatted_url, itemize
 DIGEST_IN = "digest-in.txt"
 
 # Where should the code be output?
-DIGEST_OUT = "digest-out.txt"
+DIGEST_OUT = "digest-out.html"
 
 # User-agent data for request (necessary to not be blocked by our web host)
 # This was set as a custom allowed rule by WP Engine support just for us
