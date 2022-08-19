@@ -1,6 +1,7 @@
 import requests
 from blocks import DIGEST_HEADER, DIGEST_FOOTER
 from utilities import formatted_url, itemize
+from bs4 import BeautifulSoup as bs
 
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
@@ -181,10 +182,8 @@ class Section:
 
 def write_digest(digest):
     print(f"Writing to {DIGEST_OUT}...")
-    # TODO: - Prettify like before.
     with open(DIGEST_OUT, "w") as o:
-        # o.write(BeautifulSoup(digest, "html.parser").prettify())
-        o.write(digest)
+        o.write(bs(str(digest), 'html.parser').prettify())
 
 
 def sections_from_file(directory):
