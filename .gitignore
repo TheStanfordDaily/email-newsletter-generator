@@ -1,3 +1,5 @@
-digest-out.txt
 digest-in.txt
+digest-out.txt
+digest-out.html
+__pycache__
 .DS_Store

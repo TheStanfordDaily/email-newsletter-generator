@@ -889,15 +889,15 @@ DIGEST_HEADER = """<!DOCTYPE html>
           <td align="center" class="em_aside" style="padding: 0 50px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;mso-table-lspace: 0;mso-table-rspace: 0;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
             <!-- AD
-                  <tr>
-                    <td height="30" class="em_height"> </td>
-                 </tr>
-		<tr>
-                    <td align="center" valign="top">
-                      <a href="WEBLINK" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="IMAGELINK" width="1050" height="170" alt="IMAGEALT" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
-                    </td>
-                  </tr>
-		-->
+              <tr>
+                <td height="30" class="em_height"> </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top">
+                  <a href="WEBLINK" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="IMAGELINK" width="1050" height="170" alt="IMAGEALT" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
+                </td>
+              </tr>
+		        -->
             <tbody>
              <tr>
               <td class="em_height" height="30" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
@@ -930,27 +930,27 @@ DIGEST_HEADER = """<!DOCTYPE html>
               </td>
              </tr>
              <!-- AD
-        <tr>
-          <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
-            <a href=WEBLINK style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
-              <img alt="" border="0" class="em_full_img" height="180" src=IMAGELINK style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;max-height: 59.5px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
-            </a>
-          </td>
-        </tr>
-        -->
+               <tr>
+                <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
+                  <a href=WEBLINK style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
+                    <img alt="" border="0" class="em_full_img" height="180" src=IMAGELINK style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;max-height: 59.5px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
+                  </a>
+                </td>
+              </tr>
+            -->
 """
 
 # Footer HTML used in each digest
 DIGEST_FOOTER = f"""
- <!-- AD
-        <tr>
-          <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
-            <a href=WEBLINK style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
-              <img alt="" border="0" class="em_full_img" height="180" src=IMAGELINK style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;max-height: 59.5px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
-            </a>
-          </td>
-        </tr>
-        -->
+            <!-- AD
+              <tr>
+                <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
+                  <a href=WEBLINK style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
+                    <img alt="" border="0" class="em_full_img" height="180" src=IMAGELINK style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;max-height: 59.5px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
+                  </a>
+                </td>
+               </tr>
+              -->
             </tbody>
            </table>
           </td>
