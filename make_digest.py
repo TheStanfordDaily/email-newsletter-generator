@@ -191,16 +191,34 @@ def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
     indices = [i for i, x in enumerate(lines) if x in ALL_SECTIONS]
-    sections_in = []
-    for i in range(0, len(indices)):
-        section_name = lines[indices[i]]
-        if i < len(indices) - 1:
-            group = lines[indices[i]:indices[i + 1]]
-        else:
-            group = lines[indices[i - 1]:indices[i]]
-        sections_in.append(Section(group[1:], name=section_name, featured=section_name.lower() == "featured"))
+    links = [x for x in lines if x not in ALL_SECTIONS]
+    starting_points = [x + 2 for x in indices]
+    s_names = [lines[x - 2] for x in starting_points]
 
-    return sections_in
+    section_names = [lines[0]]
+    j = 1
+    p = 0
+
+    section_links = [[]]
+    while lines[j] not in ALL_SECTIONS:
+        # yield Section(links[starting_points[i]:starting_points[i + 1]], s_names[i])
+        # print(links[starting_points[i]:starting_points[i + 2]])
+        section_links[p].append(lines[j])
+
+        if j >= len(lines) - 1:
+            break
+        if lines[j + 1] in ALL_SECTIONS:
+            section_names.append(lines[j + 1])
+            section_links.append([])
+            p += 1
+            j += 1
+
+        j += 1
+
+    k = 0
+    for group in section_links:
+        k += 1
+        yield Section(group, name=section_names[k - 1], featured=section_names[k - 1] == "FEATURED")
 
 
 if __name__ == "__main__":
