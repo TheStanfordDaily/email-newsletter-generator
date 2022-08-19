@@ -193,22 +193,22 @@ def sections_from_file(directory):
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
 
     section_names = [lines[0]]  # Add featured article(s) to the beginning.
-    j = 1
-    p = 0
+    i = 1
+    section_index = 0
 
     section_links = [[]]
-    while lines[j] not in ALL_SECTIONS:
-        section_links[p].append(lines[j])
-        if j >= len(lines) - 1:
+    while lines[i] not in ALL_SECTIONS:
+        section_links[section_index].append(lines[i])
+        if i >= len(lines) - 1:
             break
 
-        if lines[j + 1] in ALL_SECTIONS:
-            section_names.append(lines[j + 1])
+        if lines[i + 1] in ALL_SECTIONS:
+            section_names.append(lines[i + 1])
             section_links.append([])
-            p += 1
-            j += 1
+            section_index += 1
+            i += 1
 
-        j += 1
+        i += 1
 
     for index, group in enumerate(section_links):
         name = section_names[index]
