@@ -1,7 +1,7 @@
 import requests
 from blocks import DIGEST_HEADER, DIGEST_FOOTER
 from utilities import formatted_url, itemize
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
@@ -183,29 +183,23 @@ class Section:
 def write_digest(digest):
     print(f"Writing to {DIGEST_OUT}...")
     with open(DIGEST_OUT, "w") as o:
-        o.write(bs(str(digest), 'html.parser').prettify())
+        o.write(BeautifulSoup(str(digest), 'html.parser').prettify())
 
 
 def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
-    indices = [i for i, x in enumerate(lines) if x in ALL_SECTIONS]
-    links = [x for x in lines if x not in ALL_SECTIONS]
-    starting_points = [x + 2 for x in indices]
-    s_names = [lines[x - 2] for x in starting_points]
 
-    section_names = [lines[0]]
+    section_names = [lines[0]]  # Add featured article(s) to the beginning.
     j = 1
     p = 0
 
     section_links = [[]]
     while lines[j] not in ALL_SECTIONS:
-        # yield Section(links[starting_points[i]:starting_points[i + 1]], s_names[i])
-        # print(links[starting_points[i]:starting_points[i + 2]])
         section_links[p].append(lines[j])
-
         if j >= len(lines) - 1:
             break
+
         if lines[j + 1] in ALL_SECTIONS:
             section_names.append(lines[j + 1])
             section_links.append([])
@@ -214,10 +208,10 @@ def sections_from_file(directory):
 
         j += 1
 
-    k = 0
-    for group in section_links:
-        k += 1
-        yield Section(group, name=section_names[k - 1], featured=section_names[k - 1] == "FEATURED")
+    for index, group in enumerate(section_links):
+        name = section_names[index]
+        featured = name == "FEATURED"
+        yield Section(group, name=name, featured=featured)
 
 
 if __name__ == "__main__":
