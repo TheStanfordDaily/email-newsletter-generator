@@ -190,11 +190,16 @@ def write_digest(digest):
 def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
+        print(lines)
     indices = [i for i, x in enumerate(lines) if x in ALL_SECTIONS]
+    print(indices)
     sections_in = []
-    for i in range(0, len(indices) - 1):
+    for i in range(0, len(indices)):
         section_name = lines[indices[i]]
-        group = lines[indices[i]:indices[i + 1]]
+        if i < len(indices) - 1:
+            group = lines[indices[i]:indices[i + 1]]
+        else:
+            group = lines[indices[i - 1]:indices[i]]
         sections_in.append(Section(group[1:], name=section_name, featured=section_name.lower() == "featured"))
 
     return sections_in
