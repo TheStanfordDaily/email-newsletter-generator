@@ -1,7 +1,7 @@
 import requests
 from blocks import DIGEST_HEADER, DIGEST_FOOTER
 from utilities import formatted_url, itemize
-from bs4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup
 
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
@@ -71,7 +71,7 @@ class Divider:
 
 
 class Article:
-    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False):
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, cartoon=False):
         self.url = url
         self.headline = headline
         self.image_url = image_url
@@ -79,12 +79,14 @@ class Article:
         self.authors = authors
         self.excerpt = excerpt
         self.featured = featured
+        self.cartoon = cartoon
 
     def byline(self):
         return itemize(self.authors)
 
     @classmethod
     def from_json(cls, data, featured=False):
+        cartoon = 41527 in data["categories"]
         return cls(
             formatted_url(data["link"]),
             data["title"]["rendered"],
@@ -92,21 +94,33 @@ class Article:
             data["wps_subtitle"],
             data["parsely"]["meta"]["creator"],
             data["excerpt"]["rendered"],
-            featured=featured
+            featured=featured,
+            cartoon=cartoon
         )
 
     def render(self):
+        headline = f"""
+                        <tr>
+                            <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #000000;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                                <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                                {self.headline}
+                                </a>
+                            </td>
+                        </tr>
+                    """
+
+        feature_image = ""
         if self.featured:
             headline = f"""
-                <tr>
-                    <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                        <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                            {self.headline}
-                        </a>
-                    </td>
-                </tr>
-                """
-
+                            <tr>
+                                <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                                    <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                                        {self.headline}
+                                    </a>
+                                </td>
+                            </tr>
+                            """
+        if self.featured or self.cartoon:
             feature_image = f"""
                     <tr>
                         <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
@@ -117,18 +131,6 @@ class Article:
                     </tr>
                     """
             feature_image += Spacer.large()
-        else:
-            headline = f"""
-                <tr>
-                    <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #000000;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                        <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                        {self.headline}
-                        </a>
-                    </td>
-                </tr>
-            """
-
-            feature_image = ""
 
         excerpt = f"""
         <tr>
@@ -183,41 +185,35 @@ class Section:
 def write_digest(digest):
     print(f"Writing to {DIGEST_OUT}...")
     with open(DIGEST_OUT, "w") as o:
-        o.write(bs(str(digest), 'html.parser').prettify())
+        o.write(BeautifulSoup(str(digest), 'html.parser').prettify())
 
 
 def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
-    indices = [i for i, x in enumerate(lines) if x in ALL_SECTIONS]
-    links = [x for x in lines if x not in ALL_SECTIONS]
-    starting_points = [x + 2 for x in indices]
-    s_names = [lines[x - 2] for x in starting_points]
 
-    section_names = [lines[0]]
-    j = 1
-    p = 0
+    section_names = [lines[0]]  # Add featured article(s) to the beginning.
+    i = 1
+    section_index = 0
 
     section_links = [[]]
-    while lines[j] not in ALL_SECTIONS:
-        # yield Section(links[starting_points[i]:starting_points[i + 1]], s_names[i])
-        # print(links[starting_points[i]:starting_points[i + 2]])
-        section_links[p].append(lines[j])
-
-        if j >= len(lines) - 1:
+    while lines[i] not in ALL_SECTIONS:
+        section_links[section_index].append(lines[i])
+        if i >= len(lines) - 1:
             break
-        if lines[j + 1] in ALL_SECTIONS:
-            section_names.append(lines[j + 1])
+
+        if lines[i + 1] in ALL_SECTIONS:
+            section_names.append(lines[i + 1])
             section_links.append([])
-            p += 1
-            j += 1
+            section_index += 1
+            i += 1
 
-        j += 1
+        i += 1
 
-    k = 0
-    for group in section_links:
-        k += 1
-        yield Section(group, name=section_names[k - 1], featured=section_names[k - 1] == "FEATURED")
+    for index, group in enumerate(section_links):
+        name = section_names[index]
+        featured = name == "FEATURED"
+        yield Section(group, name=name, featured=featured)
 
 
 if __name__ == "__main__":
