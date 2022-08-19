@@ -2,8 +2,7 @@ from datetime import date
 from utilities import formatted_url
 
 # Header HTML in each digest
-DIGEST_HEADER = """
-<!DOCTYPE html>
+DIGEST_HEADER = """<!DOCTYPE html>
 <html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraph.org/schema/"> <head>
 
 <meta property="og:title" content="Stanford’s 16 Fulbright scholars set sights on global justice">
