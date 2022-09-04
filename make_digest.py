@@ -165,9 +165,10 @@ class Section:
         response = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
         data = response.json()
         self.articles = [Article.from_json(item, featured=featured) for item in data]
+        self.featured = featured
 
     def render(self):
-        if self.name is None or "CARTOON" in self.name:
+        if self.name is None or "CARTOON" in self.name or self.featured:
             title = ""
         else:
             title = f"""
