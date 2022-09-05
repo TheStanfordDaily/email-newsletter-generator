@@ -1,5 +1,5 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER
+from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 
@@ -225,6 +225,6 @@ def sections_from_file(directory):
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
