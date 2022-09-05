@@ -1,5 +1,5 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER
+from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 
@@ -164,7 +164,13 @@ class Section:
         slugs = [x.split('/')[6] for x in urls]
         response = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
         data = response.json()
-        self.articles = [Article.from_json(item, featured=featured) for item in data]
+
+        # Accounts for any ordering that may have been lost, as the response comes back as a dictionary, not an array.
+        sorting = {slug: index for index, slug in enumerate(slugs)}
+        try:
+            self.articles = [Article.from_json(item, featured=featured) for item in sorted(data, key=lambda s: sorting[s["slug"]])]
+        except KeyError:
+            self.articles = [Article.from_json(item, featured=featured) for item in data]
         self.featured = featured
 
     def render(self):
@@ -219,6 +225,6 @@ def sections_from_file(directory):
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
