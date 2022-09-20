@@ -9,8 +9,9 @@ DIGEST_IN = "digest-in.txt"
 # Where should the code be output?
 DIGEST_OUT = "digest-out.html"
 
-# User-agent data for request (necessary to not be blocked by our web host)
-# This was set as a custom allowed rule by WP Engine support just for us
+# User-agent data for request (necessary not to be blocked by our web host) is written below.
+# This was set as a custom allowed rule by WP Engine support just for us.
+
 USER_AGENT = {"User-agent": "9Ds8MnNbYcg5t376c8m6"}
 ENDPOINT = "https://stanforddaily.com/wp-json/wp/v2/posts"
 CATEGORY_PAGES = {
@@ -37,11 +38,11 @@ class Spacer:
 
     def __str__(self):
         return f"""
-            <tr>
-                <td class="em_height" height="{self.height}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-                </td>
-            </tr>
-        """
+                <tr>
+                    <td class="em_height" height="{self.height}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+                    </td>
+                </tr>
+            """
 
     @classmethod
     def small(cls):
@@ -71,13 +72,14 @@ class Divider:
 
 
 class Article:
-    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, cartoon=False):
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, content, featured=False, cartoon=False):
         self.url = url
         self.headline = headline
         self.image_url = image_url
         self.subtitle = subtitle
         self.authors = authors
         self.excerpt = excerpt
+        self.content = content
         self.featured = featured
         self.cartoon = cartoon
 
@@ -94,6 +96,7 @@ class Article:
             data["wps_subtitle"],
             data["parsely"]["meta"]["creator"],
             data["excerpt"]["rendered"],
+            data["content"]["rendered"],
             featured=featured,
             cartoon=cartoon
         )
@@ -112,48 +115,47 @@ class Article:
         feature_image = ""
         if self.featured:
             headline = f"""
-                            <tr>
-                                <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                                    <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                                        {self.headline}
-                                    </a>
-                                </td>
-                            </tr>
-                            """
+                        <tr>
+                            <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 25.5px;line-height: 31.5px;color: #000000;font-weight: bold;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                                <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                                    {self.headline}
+                                </a>
+                            </td>
+                        </tr>
+                    """
         if self.featured or self.cartoon:
             feature_image = f"""
-                    <tr>
-                        <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
-                            <a href="{formatted_url(self.url)}" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
-                            <img border="0" class="em_full_img" height="300" src="{self.image_url}" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="540">
-                        </a>
-                        </td>
-                    </tr>
-                    """
+                            <tr>
+                                <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+                                    <a href="{formatted_url(self.url)}" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
+                                    <img border="0" class="em_full_img" height="300" src="{self.image_url}" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="540">
+                                </a>
+                                </td>
+                            </tr>
+                        """
             feature_image += Spacer.large()
 
         excerpt = f"""
-        <tr>
-            <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                {self.excerpt}
-            </td>
-        </tr>
-        """
+                    <tr>
+                        <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                            {self.excerpt}
+                        </td>
+                    </tr>
+                """
 
         byline = f"""
-        <tr>
-              <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 14px;color: #5b5b5b;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-               <span style="font-weight: bold;color: #5b5b5b;border-collapse: collapse;mso-line-height-rule: exactly;">
-                By {self.byline()}   ●
-               </span>
-               <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                <span style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #8c1514;font-weight: bold;margin-bottom: 5px;border-collapse: collapse;mso-line-height-rule: exactly;">
-                 READ MORE »
-                </span>
-               </a>
-              </td>
-             </tr>
-        """
+                <tr>
+                    <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 14px;color: #5b5b5b;font-weight: 900;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                       <span style="font-weight: bold;color: #5b5b5b;border-collapse: collapse;mso-line-height-rule: exactly;">
+                        By {self.byline()}   \u25CF</span>
+                        <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                            <span style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #8c1514;font-weight: bold;margin-bottom: 5px;border-collapse: collapse;mso-line-height-rule: exactly;">
+                                 READ MORE \u276F
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+            """
 
         return feature_image + headline + excerpt + byline
 
@@ -178,13 +180,14 @@ class Section:
             title = ""
         else:
             title = f"""
-                    <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                      <a href="{formatted_url(CATEGORY_PAGES[self.name])}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
-                       {self.name.upper()}
-                      </a>
-                     </td>
-                     </tr>
-                    """
+                <tr>
+                    <td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                        <a href="{formatted_url(CATEGORY_PAGES[self.name])}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                           {self.name.upper()}
+                        </a>
+                    </td>
+                </tr>
+            """
 
         return title + Spacer.small() + Spacer.large().join(x.render() for x in self.articles)
 
@@ -195,8 +198,8 @@ def write_digest(digest):
         o.write(BeautifulSoup(str(digest), 'html.parser').prettify())
 
 
-def sections_from_file(directory):
-    with open(directory) as file:
+def sections_from_file(path):
+    with open(path) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
 
     section_names = [lines[0]]  # Add featured article(s) to the beginning.
