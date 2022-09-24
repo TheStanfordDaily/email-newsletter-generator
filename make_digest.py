@@ -1,5 +1,5 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD, ROUNDUP_HEADER
+from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD, SPORTS_BANNER
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 import re
@@ -162,6 +162,8 @@ class Article:
 
     def render_content(self):
         soup = BeautifulSoup(self.content, "html.parser")
+        bold = soup.find_all(lambda t: len(re.findall(r"golf", t.text.lower())) > 0)
+        print(bold)
         pre = r"<figure.*?>(.+?)</figure>"
         print([x["src"] for x in soup.findAll("img") if x.has_attr("src") and "stanforddaily.com" in x["src"]])
         img_example = """
@@ -257,7 +259,7 @@ if __name__ == "__main__":
     # digest_out += Spacer.large() + DIGEST_FOOTER
     this_week_section = Section(["https://stanforddaily.com/2022/09/18/this-week-in-sports-another-top-3-upset/"])
     this_week_article = this_week_section.articles[0]
-    digest_out = ROUNDUP_HEADER
+    digest_out = DIGEST_HEADER + SPORTS_BANNER
     digest_out += this_week_article.render_content()
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
