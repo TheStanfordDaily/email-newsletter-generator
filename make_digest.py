@@ -150,7 +150,7 @@ class Article:
                         By {self.byline()}   \u25CF</span>
                         <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
                             <span style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #8c1514;font-weight: bold;margin-bottom: 5px;border-collapse: collapse;mso-line-height-rule: exactly;">
-                                 READ MORE \u276F
+                                 READ MORE »
                             </span>
                         </a>
                     </td>
@@ -194,7 +194,7 @@ class Section:
 
 def write_digest(digest):
     print(f"Writing to {DIGEST_OUT}...")
-    with open(DIGEST_OUT, "w") as o:
+    with open(DIGEST_OUT, "w", encoding="utf-8") as o:
         o.write(BeautifulSoup(str(digest), 'html.parser').prettify())
 
 
