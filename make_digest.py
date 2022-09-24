@@ -162,20 +162,26 @@ class Article:
 
     def render_content(self):
         soup = BeautifulSoup(self.content, "html.parser")
-        bold = soup.find_all(lambda t: len(re.findall(r"golf", t.text.lower())) > 0)
+        bold = soup.find_all(lambda t: re.search(r"(^.*ball)", t.text.lower()) is not None)
+        for match in bold:
+            match.string.wrap(soup.new_tag("strong"))
+        # print(bold)
+        # print(re.search(r"(golf)", soup.text.lower()).groups())
         print(bold)
         pre = r"<figure.*?>(.+?)</figure>"
         print([x["src"] for x in soup.findAll("img") if x.has_attr("src") and "stanforddaily.com" in x["src"]])
         img_example = """
         <a href="https://stanforddaily.com/category/sports/" target="_blank" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"><img class="em_full_img" src="https://stanforddaily.com/wp-content/uploads/2022/04/sports-graphic.png" width="532.8" height="355.2" border="0" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
         """
-        return f"""
+
+        out = f"""
                             <tr>
                                 <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
                                     {re.sub(pre, img_example, self.content)}
                                 </td>
                             </tr>
                         """
+        return re.sub(r"<p.*?>.*?(volleyball)", "<p><strong>volleyball</strong>", out)
 
 
 class Section:
