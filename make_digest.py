@@ -1,5 +1,5 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
+from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD, ROUNDUP_HEADER
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 import re
@@ -161,12 +161,16 @@ class Article:
         return feature_image + headline + excerpt + byline
 
     def render_content(self):
-        pruned = self.content.replace("<img", "<img style='height: 250px; width: 300; object-fit: contain;'")
-        pre = r'width=".*"'
+        soup = BeautifulSoup(self.content, "html.parser")
+        pre = r"<figure.*?>(.+?)</figure>"
+        print([x["src"] for x in soup.findAll("img") if x.has_attr("src") and "stanforddaily.com" in x["src"]])
+        img_example = """
+        <a href="https://stanforddaily.com/category/sports/" target="_blank" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"><img class="em_full_img" src="https://stanforddaily.com/wp-content/uploads/2022/04/sports-graphic.png" width="532.8" height="355.2" border="0" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+        """
         return f"""
                             <tr>
                                 <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
-                                    {re.sub(pre, "", pruned)}
+                                    {re.sub(pre, img_example, self.content)}
                                 </td>
                             </tr>
                         """
@@ -252,7 +256,8 @@ if __name__ == "__main__":
     # digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
     # digest_out += Spacer.large() + DIGEST_FOOTER
     this_week_section = Section(["https://stanforddaily.com/2022/09/18/this-week-in-sports-another-top-3-upset/"])
-    digest_out = DIGEST_HEADER
-    digest_out += this_week_section.articles[0].render_content()
+    this_week_article = this_week_section.articles[0]
+    digest_out = ROUNDUP_HEADER
+    digest_out += this_week_article.render_content()
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
