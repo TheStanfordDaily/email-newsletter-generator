@@ -2,6 +2,7 @@ import requests
 from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
+import re
 
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
@@ -159,6 +160,17 @@ class Article:
 
         return feature_image + headline + excerpt + byline
 
+    def render_content(self):
+        pruned = self.content.replace("<img", "<img style='height: 250px; width: 300; object-fit: contain;'")
+        pre = r'width=".*"'
+        return f"""
+                            <tr>
+                                <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                                    {re.sub(pre, "", pruned)}
+                                </td>
+                            </tr>
+                        """
+
 
 class Section:
     def __init__(self, urls, name=None, featured=False):
@@ -237,6 +249,10 @@ def markup_from_url(url):
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    # digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    # digest_out += Spacer.large() + DIGEST_FOOTER
+    this_week_section = Section(["https://stanforddaily.com/2022/09/18/this-week-in-sports-another-top-3-upset/"])
+    digest_out = DIGEST_HEADER
+    digest_out += this_week_section.articles[0].render_content()
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
