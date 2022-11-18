@@ -568,3 +568,33 @@ SPORTS_BANNER = """
                                     <td height="10" class="em_height" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"> </td>
                                 </tr>
 """
+
+MARKUP_HEADER = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
+    <style>
+        .elementor-widget-container {
+            max-width: 600px;
+            margin: auto;
+        }
+        figure > img {
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1, p, li, figcaption {
+            font-family: 'Open Sans';
+        }
+        a {
+            color: #8c1514;
+        }
+    </style>
+</head>
+<body>
+"""

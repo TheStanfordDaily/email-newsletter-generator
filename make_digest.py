@@ -246,8 +246,7 @@ def sections_from_file(path):
 
     for index, group in enumerate(section_links):
         name = section_names[index]
-        featured = name == "FEATURED"
-        yield Section(group, name=name, featured=featured)
+        yield Section(group, name, name == "FEATURED")
 
 
 if __name__ == "__main__":
