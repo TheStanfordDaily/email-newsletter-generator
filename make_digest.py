@@ -226,15 +226,6 @@ def sections_from_file(path):
         yield Section(group, name=name, featured=featured)
 
 
-def markup_from_url(url):
-    slug = url.split('/')[6]
-    response = requests.get(ENDPOINT, params={"slug": slug})
-    data = response.json()[0]
-    # TODO: Add URL query parameters to links in the content.
-    # It works but does not look pretty. CSS needs to be updated or inserted here.
-    return data["content"]["rendered"]
-
-
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
     digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
