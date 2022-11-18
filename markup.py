@@ -1,5 +1,5 @@
-import sys
 import requests
+import sys
 from make_digest import ENDPOINT, write_digest
 from blocks import DIGEST_FOOTER, DIGEST_AD, MARKUP_HEADER
 
