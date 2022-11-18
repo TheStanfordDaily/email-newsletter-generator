@@ -1,7 +1,8 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
+from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD, SPORTS_BANNER
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
+import re
 
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
@@ -150,7 +151,7 @@ class Article:
                         By {self.byline()}   \u25CF</span>
                         <a href="{formatted_url(self.url)}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
                             <span style="font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 15px;color: #8c1514;font-weight: bold;margin-bottom: 5px;border-collapse: collapse;mso-line-height-rule: exactly;">
-                                 READ MORE \u276F
+                                 READ MORE »
                             </span>
                         </a>
                     </td>
@@ -158,6 +159,29 @@ class Article:
             """
 
         return feature_image + headline + excerpt + byline
+
+    def render_content(self):
+        soup = BeautifulSoup(self.content, "html.parser")
+        bold = soup.find_all(lambda t: re.search(r"(^.*ball)", t.text.lower()) is not None)
+        for match in bold:
+            match.string.wrap(soup.new_tag("strong"))
+        # print(bold)
+        # print(re.search(r"(golf)", soup.text.lower()).groups())
+        print(bold)
+        pre = r"<figure.*?>(.+?)</figure>"
+        print([x["src"] for x in soup.findAll("img") if x.has_attr("src") and "stanforddaily.com" in x["src"]])
+        img_example = """
+        <a href="https://stanforddaily.com/category/sports/" target="_blank" style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"><img class="em_full_img" src="https://stanforddaily.com/wp-content/uploads/2022/04/sports-graphic.png" width="532.8" height="355.2" border="0" style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+        """
+
+        out = f"""
+                            <tr>
+                                <td align="left" class="article-excerpt em_gray" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                                    {re.sub(pre, img_example, self.content)}
+                                </td>
+                            </tr>
+                        """
+        return re.sub(r"<p.*?>.*?(volleyball)", "<p><strong>volleyball</strong>", out)
 
 
 class Section:
@@ -194,7 +218,7 @@ class Section:
 
 def write_digest(digest):
     print(f"Writing to {DIGEST_OUT}...")
-    with open(DIGEST_OUT, "w") as o:
+    with open(DIGEST_OUT, "w", encoding="utf-8") as o:
         o.write(BeautifulSoup(str(digest), 'html.parser').prettify())
 
 
@@ -228,6 +252,11 @@ def sections_from_file(path):
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    # digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    # digest_out += Spacer.large() + DIGEST_FOOTER
+    this_week_section = Section(["https://stanforddaily.com/2022/09/18/this-week-in-sports-another-top-3-upset/"])
+    this_week_article = this_week_section.articles[0]
+    digest_out = DIGEST_HEADER + SPORTS_BANNER
+    digest_out += this_week_article.render_content()
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)

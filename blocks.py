@@ -530,3 +530,41 @@ DIGEST_AD = """
            </tr>
           -->
         """
+
+SPORTS_BANNER = """
+                                <tr>
+                                    <td height="10" style="font-size: 1px;line-height: 1px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"> </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" style="width: 50%;font-size: 0px;line-height: 0px;height: 3px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+                                        <hr style="width:140px;color:#8c1514">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" class="em_height" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"> </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 40px;line-height: 45px;color: #615F5E;font-weight: 900;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+                                        <a style="color: #5019;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;text-decoration: none !important;" href="https://www.stanforddaily.com/category/sports/">This Week in Sports</a>
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                    <td height="10" class="em_height"> </td>
+                  </tr>
+                  <tr>
+                    <td align="center" valign="top">
+                      <a href="https://www.stanforddaily.com/category/cartoons/" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2020/02/weekend_roundup_logo-1.jpg" width="200" height="200" alt="Weekend Roundup logo" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:200px;"></a>
+                    </td>
+                  </tr>-->
+                                <tr>
+                                    <td height="10" class="em_height" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"> </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" valign="top" style="width: 50%;font-size: 0px;line-height: 0px;height: 3px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
+                                        <hr style="width:140px;color:#8c1514">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="10" class="em_height" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;"> </td>
+                                </tr>
+"""
