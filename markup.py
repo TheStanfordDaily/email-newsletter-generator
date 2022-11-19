@@ -17,7 +17,7 @@ def markup_from_url(url):
      </em>
     """
 
-    return "<h1>This Week in Sports</h1>" + data["content"]["rendered"]  # <h1>{data['title']['rendered']}</h1>
+    return "<h1>This Week in Sports</h1>" + feature_image + data["content"]["rendered"]  # <h1>{data['title']['rendered']}</h1>
 
 
 if __name__ == "__main__":
