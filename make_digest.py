@@ -15,6 +15,7 @@ USER_AGENT = {"User-agent": "9Ds8MnNbYcg5t376c8m6"}
 ENDPOINT = "https://stanforddaily.com/wp-json/wp/v2/posts"
 CATEGORY_PAGES = {
     "FEATURED": "",
+    "EDITOR'S PICK": "",
     "NEWS": "https://stanforddaily.com/category/news/",
     "OPINIONS": "https://stanforddaily.com/category/opinions/",
     "SPORTS": "https://stanforddaily.com/category/sports/",
@@ -159,8 +160,11 @@ class Article:
 
 
 class Section:
-    def __init__(self, urls, name=None, featured=False):
+    def __init__(self, urls, name=None, featured=False, editorsNote=None, editor=None):
         self.name = name
+        self.editorsNote = editorsNote
+        self.editor = editor
+
         slugs = [x.split('/')[6] for x in urls]
         response = requests.get(ENDPOINT, params={"slug": ','.join(slugs)})
         data = response.json()
@@ -176,6 +180,30 @@ class Section:
     def render(self):
         if self.name is None or "CARTOON" in self.name or self.featured:
             title = ""
+        if "EDITOR'S PICK" in self.name:
+            title = f"""
+                    <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                      <a href="{formatted_url(CATEGORY_PAGES[self.name])}" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;color: inherit !important;text-decoration: none !important;">
+                       {self.name.upper()}
+                      </a>
+                     </td>
+                     </tr>
+                     <tr>
+                        <td align="left" class="article-excerpt em_gray" style="font-style: italic; font-family: 'Open Sans', Arial, sans-serif;font-size: 14px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                        <p>
+                       {self.editorsNote}
+                        </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="article-excerpt em_gray" style="font-style: italic;  font-family: 'Open Sans', Arial, sans-serif;font-size: 12px;line-height: 20px;color: #5b5b5b;padding-bottom: 12px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
+                        <p>
+                        — {self.editor}
+                        </p>
+                        </td>
+                    </tr>
+                    
+                    """
         else:
             title = f"""
                     <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
@@ -198,12 +226,22 @@ def write_digest(digest):
 def sections_from_file(directory):
     with open(directory) as file:
         lines = [x for x in map(lambda r: r.strip(), file.readlines()) if len(x) > 0]
-
     section_names = [lines[0]]  # Add featured article(s) to the beginning.
     i = 1
     section_index = 0
 
     section_links = [[]]
+
+    try:
+        editors_note_idx = lines.index("EDITOR'S PICK")
+        editors_note = lines[editors_note_idx+2]
+        editor = lines[editors_note_idx+3]
+        lines.pop(editors_note_idx+3)
+        lines.pop(editors_note_idx+2)
+    except ValueError:
+        editors_note = None
+        editor = None
+    
     while lines[i] not in ALL_SECTIONS:
         section_links[section_index].append(lines[i])
         if i >= len(lines) - 1:
@@ -220,7 +258,7 @@ def sections_from_file(directory):
     for index, group in enumerate(section_links):
         name = section_names[index]
         featured = name == "FEATURED"
-        yield Section(group, name=name, featured=featured)
+        yield Section(group, name=name, featured=featured, editor=editor, editorsNote=editors_note)
 
 
 if __name__ == "__main__":
