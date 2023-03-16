@@ -10,6 +10,11 @@ https://stanforddaily.com/2021/01/09/theyre-harming-people-with-this-students-re
 https://stanforddaily.com/2021/01/10/stanford-researchers-study-at-home-covid-19-saliva-test/
 https://stanforddaily.com/2021/01/10/schools-like-stanford-could-be-better-social-mobility-elevators-new-report-finds/
 
+AD
+https://www.treehouseatstanford.com/
+https://stanforddaily.com/wp-content/uploads/2023/03/Email-newsletter-3_14_23.jpg
+Ad that reads: TREEHOUSE AT TRESIDDER // LOVE AT FIRST SLICE
+
 OPINIONS
 https://stanforddaily.com/2021/01/10/letter-to-admin-stop-excluding-student-voices-from-decisions-that-impact-us/
 https://stanforddaily.com/2021/01/10/letter-to-the-editor-josh-hawley-02-must-resign/
@@ -30,7 +35,7 @@ https://stanforddaily.com/2021/01/10/the-voice-contestant-anthony-arya-24-reflec
 THE GRIND
 https://stanforddaily.com/2021/01/10/pandemic-abroad/
 
-SATIRE
+HUMOR
 https://stanforddaily.com/2021/01/10/maybe-smell-it-first-recommends-fda/
 
 CARTOON OF THE DAY
