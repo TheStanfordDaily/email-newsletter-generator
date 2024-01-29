@@ -1,5 +1,5 @@
 import requests
-from blocks import DIGEST_HEADER, DIGEST_FOOTER, DIGEST_AD
+from blocks import DIGEST_HEADER, DIGEST_LOGO, DIGEST_FOOTER, DIGEST_AD
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 
@@ -17,6 +17,7 @@ CATEGORY_PAGES = {
     "FEATURED": "",
     "EDITOR'S PICK": "",
     "AD":"",
+    "TOP AD":"",
     "NEWS": "https://stanforddaily.com/category/news/",
     "OPINIONS": "https://stanforddaily.com/category/opinions/",
     "SPORTS": "https://stanforddaily.com/category/sports/",
@@ -208,16 +209,26 @@ class Section:
                     </tr>
                     
                     """
-        elif self.name == "AD":
-            title = f"""
-                    <tr>
-                        <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
-                        <a href={self.ad_weblink} style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
-                            <img alt="{self.ad_alt}" border="0" class="em_full_img" height="180" src={self.ad_src} style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
-                        </a>
-                        </td>
-                    </tr>
-                    """
+        elif self.name in ["AD", "TOP AD"]:
+            if self.ad_weblink:
+                title = f"""
+                        <tr>
+                            <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
+                            <a href={self.ad_weblink} style="text-decoration: none;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" target="_blank">
+                                <img alt="{self.ad_alt}" border="0" class="em_full_img" height="180" src={self.ad_src} style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
+                            </a>
+                            </td>
+                        </tr>
+                        """
+            else:
+                title = f"""
+                        <tr>
+                            <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse; padding-bottom: 25px;">
+                                <img alt="{self.ad_alt}" border="0" class="em_full_img" height="180" src={self.ad_src} style="display: block;font-family: Arial, sans-serif;font-size: 20px;line-height: 25px;color: #424242;max-width: 520px;border: 0 !important;height: auto;outline: none !important;text-decoration: none;-ms-interpolation-mode: bicubic;" width="600">
+                            </td>
+                        </tr>
+                        """
+            return Spacer.large() + title
         else:
             title = f"""
                     <tr><td align="left" class="em_defaultlink" style="font-family: 'Open Sans', Arial, sans-serif;font-size: 17px;line-height: 21px;color: #8c1514;font-weight: 900;padding-bottom: 5px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;" valign="top">
@@ -228,7 +239,7 @@ class Section:
                      </tr>
                     """
 
-        return title + Spacer.small() + Spacer.large().join(x.render() for x in self.articles)
+        return title + Spacer.small() + Spacer.large().join(x.render() for x in self.articles) + DIGEST_AD + Spacer.large()
 
 
 def write_digest(digest):
@@ -246,19 +257,7 @@ def sections_from_file(directory):
 
     section_links = [[]]
 
-    try:
-        editors_note_idx = lines.index("AD")
-        ad_weblink = lines[editors_note_idx+1]
-        ad_src= lines[editors_note_idx+2]
-        ad_alt= lines[editors_note_idx+3]
-        lines.pop(editors_note_idx+3)
-        # lines.pop(editors_note_idx+2)
-        lines.pop(editors_note_idx+1)
-        # lines.pop(editors_note_idx)
-    except ValueError:
-        ad_weblink = None
-        ad_src = None
-        ad_alt = None
+    ad_weblink, ad_src, ad_alt = None, None, None
 
     try:
         editors_note_idx = lines.index("EDITOR'S PICK")
@@ -283,14 +282,21 @@ def sections_from_file(directory):
 
         i += 1
 
+    sections = []
+
     for index, group in enumerate(section_links):
         name = section_names[index]
         featured = name == "FEATURED"
-        yield Section(group, name=name, featured=featured, editor=editor, editorsNote=editors_note, ad_weblink=ad_weblink,ad_src=ad_src, ad_alt=ad_alt )
-
+        if name in ["AD", "TOP AD"]:
+            ad_src, ad_alt = group[1], group[2]
+            ad_weblink = None if group[0].lower() == "none" else group[0]
+            group = []
+        sections.append(Section(group, name=name, featured=featured, editor=editor, editorsNote=editors_note, ad_weblink=ad_weblink,ad_src=ad_src, ad_alt=ad_alt))
+    return sections
 
 if __name__ == "__main__":
     sections = sections_from_file(DIGEST_IN)
-    digest_out = DIGEST_HEADER + (DIGEST_AD + Spacer.large() + Divider.default()).join(x.render() for x in sections)
+    digest_out = DIGEST_HEADER + "".join(x.render() for x in sections if x.name == "TOP AD")
+    digest_out += DIGEST_LOGO + (Divider.default()).join(x.render() for x in sections if x.name != "TOP AD")
     digest_out += Spacer.large() + DIGEST_FOOTER
     write_digest(digest_out)
