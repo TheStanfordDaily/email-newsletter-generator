@@ -3,6 +3,8 @@ from blocks import DIGEST_HEADER, DIGEST_LOGO, DIGEST_FOOTER, DIGEST_AD
 from utilities import formatted_url, itemize
 from bs4 import BeautifulSoup
 
+from pprint import pprint
+
 # Where's the list of articles to include in each section?
 DIGEST_IN = "digest-in.txt"
 
@@ -74,7 +76,7 @@ class Divider:
 
 
 class Article:
-    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, cartoon=False):
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, cartoon=False, video=False):
         self.url = url
         self.headline = headline
         self.image_url = image_url
@@ -83,12 +85,13 @@ class Article:
         self.excerpt = excerpt
         self.featured = featured
         self.cartoon = cartoon
+        self.video = video
 
     def byline(self):
         return itemize(self.authors)
 
     @classmethod
-    def from_json(cls, data, featured=False):
+    def from_json(cls, data, featured=False, video=False):
         cartoon = 41527 in data["categories"]
         return cls(
             formatted_url(data["link"]),
@@ -98,7 +101,8 @@ class Article:
             data["parsely"]["meta"]["creator"],
             data["excerpt"]["rendered"],
             featured=featured,
-            cartoon=cartoon
+            cartoon=cartoon,
+            video=video
         )
 
     def render(self):
@@ -123,7 +127,7 @@ class Article:
                                 </td>
                             </tr>
                             """
-        if self.featured or self.cartoon:
+        if self.featured or self.cartoon or self.video:
             feature_image = f"""
                     <tr>
                         <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
@@ -162,7 +166,7 @@ class Article:
 
 
 class Section:
-    def __init__(self, urls, name=None, featured=False, editorsNote=None, editor=None, ad_weblink=None,ad_src=None, ad_alt=None):
+    def __init__(self, urls, name=None, featured=False, video=False, editorsNote=None, editor=None, ad_weblink=None,ad_src=None, ad_alt=None):
         self.name = name
         self.editorsNote = editorsNote
         self.editor = editor
@@ -181,6 +185,7 @@ class Section:
         except KeyError:
             self.articles = [Article.from_json(item, featured=featured) for item in data]
         self.featured = featured
+        self.video = video
 
     def render(self):
         if self.name is None or "CARTOON" in self.name or self.featured:
