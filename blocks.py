@@ -289,20 +289,22 @@ DIGEST_HEADER = """
                           <td valign="top">
                             <![endif]-->
                             <table width="275" border="0" cellspacing="0" cellpadding="0" align="right" class="em_wrapper">
-                              <tbody><tr>
-                                <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
-                                  <a href="{formatted_url("https://www.stanforddaily.com/")}">stanforddaily.com | {date.today().strftime("%B %d, %Y")}</a>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td height="35" class="em_height">&nbsp;</td>
-                              </tr>
-                              <tr>
-                                <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
-                                  <a href="*|ARCHIVE|*" target="_blank" style="text-decoration:none;color:#7d7d7d;">Click to view this email in your browser</a>
-                                </td>
-                              </tr>
-                            </tbody></table>
+                              <tbody>
+                                <tr>
+                                  <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
+                                    <a href="{formatted_url("https://www.stanforddaily.com/")}">stanforddaily.com | {date.today().strftime("%B %d, %Y")}</a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td height="35" class="em_height">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                  <td align="right" valign="top" class="em_defaultlink em_center" mc:edit="pre2" style="font-family:'Open Sans', Arial, sans-serif;font-size:10px;line-height:11px;color:#ffffff;">
+                                    <a href="*|ARCHIVE|*" target="_blank" style="text-decoration:none;color:#7d7d7d;">Click to view this email in your browser</a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
                           </td>
                         </tr>
                       </tbody></table>
@@ -329,24 +331,24 @@ DIGEST_HEADER = """
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 """
 
-DIGEST_LOGO = """
+DIGEST_LOGO = f"""
         <tbody>
-            <tr>
-                <td height="30" class="em_height">&nbsp;</td>
-            </tr>
-            <tr>
+          <tr>
+            <td height="30" class="em_height">&nbsp;</td>
+          </tr>
+          <tr>
             <td align="center" valign="top">
               <a href="{formatted_url("https://www.stanforddaily.com/")}" target="_blank" style="text-decoration:none;"><img mc:edit="image6" class="em_full_img" src="https://wp.stanforddaily.com/wp-content/uploads/2019/11/cropped-DailyLogo-CardinalRed.png" width="600" height="180" alt="The Stanford Daily logo" border="0" style="display:block;font-family:Arial, sans-serif; font-size:20px; line-height:25px; color:#424242; max-width:520px; max-height:59.5px;"></a>
             </td>
-            </tr>
-		    <tr>
+          </tr>
+		      <tr>
             <td>
               <div class="top_prompts" style="display: flex;margin-top: 10px;"><a class="top_prompts" href="{formatted_url("https://www.stanforddaily.com/tips/")}" style="margin-left:auto;margin-right:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none; border-right: 3px solid #8c1514;padding-right:10px;">SUBMIT A TIP</a><a class="top_prompts" href="{formatted_url("https://www.stanforddaily.com/donate/")}" style="font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">DONATE</a><a class="top_prompts" href="{formatted_url("https://www.stanforddaily.com/submitting-to-the-daily/")}" style="margin-right:auto;border-left: 3px solid #8c1514; margin-left:10px;padding-left:10px;font-family:'Open Sans', Arial, sans-serif;font-weight: bold;color:#8c1514; text-decoration: none;">SUBMIT WORK</a></div>
             </td>
-            </tr>
-            <tr>
-                <td height="30" style="font-size:1px;line-height:1px;">&nbsp;</td>
-            </tr>
+          </tr>
+          <tr>
+            <td height="30" style="font-size:1px;line-height:1px;">&nbsp;</td>
+          </tr>
 """
 
 # Footer HTML used in each digest
