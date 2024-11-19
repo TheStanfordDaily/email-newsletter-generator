@@ -31,7 +31,8 @@ CATEGORY_PAGES = {
     "VIDEO": "https://www.youtube.com/channel/UCWg3QqUzqxXt6herm5sMjNw",
     "CARTOON OF THE WEEK": "https://stanforddaily.com/category/cartoons/",
     "CARTOON OF THE DAY": "https://stanforddaily.com/category/cartoons/",
-    "CARTOONS": "https://stanforddaily.com/category/cartoons/"
+    "CARTOONS": "https://stanforddaily.com/category/cartoons/",
+    "CROSSWORD": "https://stanforddaily.com/category/crossword"
 }
 ALL_SECTIONS = list(CATEGORY_PAGES.keys())
 
@@ -76,7 +77,7 @@ class Divider:
 
 
 class Article:
-    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, cartoon=False, video=False):
+    def __init__(self, url, headline, image_url, subtitle, authors, excerpt, featured=False, include_photo=False):
         self.url = url
         self.headline = headline
         self.image_url = image_url
@@ -84,15 +85,13 @@ class Article:
         self.authors = authors
         self.excerpt = excerpt
         self.featured = featured
-        self.cartoon = cartoon
-        self.video = video
+        self.include_photo = include_photo
 
     def byline(self):
         return itemize(self.authors)
 
     @classmethod
-    def from_json(cls, data, featured=False, video=False):
-        cartoon = 41527 in data["categories"]
+    def from_json(cls, data, featured=False, include_photo=False):
         return cls(
             formatted_url(data["link"]),
             data["title"]["rendered"],
@@ -101,8 +100,7 @@ class Article:
             data["parsely"]["meta"]["creator"],
             data["excerpt"]["rendered"],
             featured=featured,
-            cartoon=cartoon,
-            video=video
+            include_photo=include_photo
         )
 
     def render(self):
@@ -127,7 +125,7 @@ class Article:
                                 </td>
                             </tr>
                             """
-        if self.featured or self.cartoon or self.video:
+        if self.featured or self.include_photo:
             feature_image = f"""
                     <tr>
                         <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;border-collapse: collapse;">
@@ -166,7 +164,7 @@ class Article:
 
 
 class Section:
-    def __init__(self, urls, name=None, featured=False, video=False, editorsNote=None, editor=None, ad_weblink=None,ad_src=None, ad_alt=None):
+    def __init__(self, urls, name=None, featured=False, include_photo=False, editorsNote=None, editor=None, ad_weblink=None,ad_src=None, ad_alt=None):
         self.name = name
         self.editorsNote = editorsNote
         self.editor = editor
@@ -181,14 +179,14 @@ class Section:
         # Accounts for any ordering that may have been lost, as the response comes back as a dictionary, not an array.
         sorting = {slug: index for index, slug in enumerate(slugs)}
         try:
-            self.articles = [Article.from_json(item, featured=featured, video=video) for item in sorted(data, key=lambda s: sorting[s["slug"]])]
+            self.articles = [Article.from_json(item, featured=featured, include_photo=include_photo) for item in sorted(data, key=lambda s: sorting[s["slug"]])]
         except KeyError:
-            self.articles = [Article.from_json(item, featured=featured, video=video) for item in data]
+            self.articles = [Article.from_json(item, featured=featured, include_photo=include_photo) for item in data]
         self.featured = featured
-        self.video = video
+        self.include_photo = include_photo
 
     def render(self):
-        if self.name is None or "CARTOON" in self.name or self.featured:
+        if self.name is None or self.featured:
             title = ""
         elif "EDITOR'S PICK" in self.name:
             title = f"""
@@ -292,12 +290,12 @@ def sections_from_file(directory):
     for index, group in enumerate(section_links):
         name = section_names[index]
         featured = name == "FEATURED"
-        video = name == "VIDEO"
+        include_photo = name in ["CARTOONS", "CROSSWORD", "VIDEO"]
         if name in ["AD", "TOP AD"]:
             ad_src, ad_alt = group[1], group[2]
             ad_weblink = None if group[0].lower() == "none" else group[0]
             group = []
-        sections.append(Section(group, name=name, featured=featured, video=video, editor=editor, editorsNote=editors_note, ad_weblink=ad_weblink,ad_src=ad_src, ad_alt=ad_alt))
+        sections.append(Section(group, name=name, featured=featured, include_photo=include_photo, editor=editor, editorsNote=editors_note, ad_weblink=ad_weblink,ad_src=ad_src, ad_alt=ad_alt))
     return sections
 
 if __name__ == "__main__":
