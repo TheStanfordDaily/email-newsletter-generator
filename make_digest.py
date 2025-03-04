@@ -32,7 +32,8 @@ CATEGORY_PAGES = {
     "CARTOON OF THE WEEK": "https://stanforddaily.com/category/cartoons/",
     "CARTOON OF THE DAY": "https://stanforddaily.com/category/cartoons/",
     "CARTOONS": "https://stanforddaily.com/category/cartoons/",
-    "CROSSWORD": "https://stanforddaily.com/category/crossword"
+    "CROSSWORD": "https://stanforddaily.com/category/crossword",
+    "LETTER FROM THE EDITORS": "https://stanforddaily.com/category/letter-from-the-editors/"
 }
 ALL_SECTIONS = list(CATEGORY_PAGES.keys())
 
