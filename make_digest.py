@@ -32,7 +32,7 @@ CATEGORY_PAGES = {
     "CARTOON OF THE WEEK": "https://stanforddaily.com/category/cartoons/",
     "CARTOON OF THE DAY": "https://stanforddaily.com/category/cartoons/",
     "CARTOONS": "https://stanforddaily.com/category/cartoons/",
-    "CROSSWORD": "https://stanforddaily.com/category/crossword",
+    "GAMES": "https://stanforddaily.com/category/games",
     "LETTER FROM THE EDITORS": "https://stanforddaily.com/category/letter-from-the-editors/"
 }
 ALL_SECTIONS = list(CATEGORY_PAGES.keys())
@@ -291,7 +291,7 @@ def sections_from_file(directory):
     for index, group in enumerate(section_links):
         name = section_names[index]
         featured = name == "FEATURED"
-        include_photo = name in ["CARTOONS", "CROSSWORD", "VIDEO"]
+        include_photo = name in ["CARTOONS", "GAMES", "VIDEO"]
         if name in ["AD", "TOP AD"]:
             ad_src, ad_alt = group[1], group[2]
             ad_weblink = None if group[0].lower() == "none" else group[0]
